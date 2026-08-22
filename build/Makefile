@@ -129,6 +129,54 @@ drone-simulation/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/build
 .PHONY : drone-simulation/fast
 
+src/Drone.obj: src/Drone.cpp.obj
+.PHONY : src/Drone.obj
+
+# target to build an object file
+src/Drone.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj
+.PHONY : src/Drone.cpp.obj
+
+src/Drone.i: src/Drone.cpp.i
+.PHONY : src/Drone.i
+
+# target to preprocess a source file
+src/Drone.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/Drone.cpp.i
+.PHONY : src/Drone.cpp.i
+
+src/Drone.s: src/Drone.cpp.s
+.PHONY : src/Drone.s
+
+# target to generate assembly for a file
+src/Drone.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/Drone.cpp.s
+.PHONY : src/Drone.cpp.s
+
+src/Motor.obj: src/Motor.cpp.obj
+.PHONY : src/Motor.obj
+
+# target to build an object file
+src/Motor.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj
+.PHONY : src/Motor.cpp.obj
+
+src/Motor.i: src/Motor.cpp.i
+.PHONY : src/Motor.i
+
+# target to preprocess a source file
+src/Motor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/Motor.cpp.i
+.PHONY : src/Motor.cpp.i
+
+src/Motor.s: src/Motor.cpp.s
+.PHONY : src/Motor.s
+
+# target to generate assembly for a file
+src/Motor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/Motor.cpp.s
+.PHONY : src/Motor.cpp.s
+
 src/PID.obj: src/PID.cpp.obj
 .PHONY : src/PID.obj
 
@@ -186,6 +234,12 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... drone-simulation
+	@echo ... src/Drone.obj
+	@echo ... src/Drone.i
+	@echo ... src/Drone.s
+	@echo ... src/Motor.obj
+	@echo ... src/Motor.i
+	@echo ... src/Motor.s
 	@echo ... src/PID.obj
 	@echo ... src/PID.i
 	@echo ... src/PID.s

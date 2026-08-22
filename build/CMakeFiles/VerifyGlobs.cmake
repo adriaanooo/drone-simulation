@@ -4,6 +4,8 @@
 # SOURCES at CMakeLists.txt:11 (file)
 file(GLOB NEW_GLOB LIST_DIRECTORIES true "C:/Users/adriv/PersonalProjects/drone-simulation/src/*.cpp")
 set(OLD_GLOB
+  "C:/Users/adriv/PersonalProjects/drone-simulation/src/Drone.cpp"
+  "C:/Users/adriv/PersonalProjects/drone-simulation/src/Motor.cpp"
   "C:/Users/adriv/PersonalProjects/drone-simulation/src/PID.cpp"
   "C:/Users/adriv/PersonalProjects/drone-simulation/src/main.cpp"
   )

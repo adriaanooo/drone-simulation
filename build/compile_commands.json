@@ -1,6 +1,18 @@
 [
 {
   "directory": "C:/Users/adriv/PersonalProjects/drone-simulation/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles\\drone-simulation.dir\\includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\drone-simulation.dir\\src\\Drone.cpp.obj -c C:\\Users\\adriv\\PersonalProjects\\drone-simulation\\src\\Drone.cpp",
+  "file": "C:/Users/adriv/PersonalProjects/drone-simulation/src/Drone.cpp",
+  "output": "CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj"
+},
+{
+  "directory": "C:/Users/adriv/PersonalProjects/drone-simulation/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles\\drone-simulation.dir\\includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\drone-simulation.dir\\src\\Motor.cpp.obj -c C:\\Users\\adriv\\PersonalProjects\\drone-simulation\\src\\Motor.cpp",
+  "file": "C:/Users/adriv/PersonalProjects/drone-simulation/src/Motor.cpp",
+  "output": "CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj"
+},
+{
+  "directory": "C:/Users/adriv/PersonalProjects/drone-simulation/build",
   "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles\\drone-simulation.dir\\includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\drone-simulation.dir\\src\\PID.cpp.obj -c C:\\Users\\adriv\\PersonalProjects\\drone-simulation\\src\\PID.cpp",
   "file": "C:/Users/adriv/PersonalProjects/drone-simulation/src/PID.cpp",
   "output": "CMakeFiles/drone-simulation.dir/src/PID.cpp.obj"
