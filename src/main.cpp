@@ -1,43 +1,62 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+
 #include "PID.hpp"
+#include "Motor.hpp"
+#include "Drone.hpp"
 
 int main(int, char**){
     // Output file setup
     std::ofstream file("output.csv");
-    file << "time,target angle,angle,angular velocity,torque\n";
+    file << "time,target angle,angle,angular velocity,left RPM,right RPM\n";
 
     // Simulation parameters
     double dt = 0.001;
-    double simulationTime = 60.0;
+    double simulationTime = 30.0;
 
-    // Rigid body parameters
-    double angle = 0.0;
-    double angularVelocity = 0.0;
-    double rotationalInertia = 0.01;
+    // Motor initialization
+    Motor motorFL(16.0, 4000.0, 1.8e-7);
+    Motor motorFR(16.0, 4000.0, 1.8e-7);
 
-    // Controller
-    PID pid(5, 0, 10);
+    // Drone initialization
+    Drone drone(0.25, 0.003, motorFL, motorFR);
 
-    // Simulation
-    double targetAngle = 0.5;
+    // Controller initialization
+    PID pidYaw(3.0, 0.1, 0.5);
 
-    for (double time = 0.0; time < simulationTime; time +=dt)
+    double targetAngle = 0.0;
+    double baseVoltage = 8.0;
+
+    for (double t = 0.0; t < simulationTime; t +=dt)
     {
-        double torque = pid.update(targetAngle, angle, dt);
-
-        // Torque limiter
-        if (torque > 2) {
-            torque = 2; 
+        // Angle
+        if (t < 5.0) {
+            targetAngle = 0.0;
+        } else if (t < 10.0) {
+            targetAngle = 0.5;
+        } else if (t < 15.0) {
+            targetAngle = 0.2;
+        } else if (t < 20.0) {
+            targetAngle = -0.5;
+        } else if (t < 25.0) {
+            targetAngle = 0.0;
         }
 
-        double angularAcceleration = torque / rotationalInertia;
-        
-        angularVelocity += angularAcceleration * dt;
-        angle += angularVelocity * dt;
+        double currentAngle = drone.getXAngle();
+        double deltaVoltage = pidYaw.update(targetAngle, currentAngle, dt);
 
-        file << time << "," << targetAngle << "," << angle << "," << angularVelocity << "," << torque << "\n";
+        double voltageFL = baseVoltage + deltaVoltage;
+        double voltageFR = baseVoltage - deltaVoltage;
+
+        drone.update(voltageFL, voltageFR, dt);
+
+        file << t << ","
+        << targetAngle << ","
+        << drone.getXAngle() << ","
+        << drone.getXAngularVelocity() << ","
+        << motorFL.getRPM() << ","
+        << motorFR.getRPM() << "\n";
     }
 
     system("python ../scripts/plot.py");
