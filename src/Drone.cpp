@@ -1,8 +1,8 @@
 #include "Drone.hpp"
 #include <cmath>
 
-Drone::Drone(double armLength, double inertiaXX, double inertiaYY, Motor& motorFL, Motor& motorFR, Motor& motorRL, Motor& motorRR)
-    : armLength(armLength), inertiaXX(inertiaXX), inertiaYY(inertiaYY), motorFL(motorFL), motorFR(motorFR), motorRL(motorRL), motorRR(motorRR)
+Drone::Drone(double armLength, double inertiaXX, double inertiaYY, double inertiaZZ, Motor& motorFL, Motor& motorFR, Motor& motorRL, Motor& motorRR)
+    : armLength(armLength), inertiaXX(inertiaXX), inertiaYY(inertiaYY), inertiaZZ(inertiaZZ), motorFL(motorFL), motorFR(motorFR), motorRL(motorRL), motorRR(motorRR)
 {
 }
 
@@ -25,4 +25,11 @@ void Drone::update(double voltageFL, double voltageFR, double voltageRL, double 
     pitchAcceleration = netPitchTorque / inertiaYY;
     pitchVelocity += pitchAcceleration * dt;
     pitchAngle += pitchVelocity * dt;
+
+    // Yaw
+    double netYawTorque = (thrustFL + thrustRR - thrustFR - thrustRL);
+
+    yawAcceleration = netYawTorque / inertiaZZ;
+    yawVelocity += yawAcceleration * dt;
+    yawAngle += yawVelocity * dt;
 }
