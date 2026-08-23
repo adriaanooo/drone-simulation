@@ -1,8 +1,8 @@
 CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj: \
  C:\Users\adriv\PersonalProjects\drone-simulation\src\Motor.cpp \
  C:/Users/adriv/PersonalProjects/drone-simulation/include/Motor.hpp \
- C:/msys64/ucrt64/include/c++/16.1.0/algorithm \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_algobase.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/cmath \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/requires_hosted.h \
  C:/msys64/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/c++config.h \
  C:/msys64/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/os_defines.h \
  C:/msys64/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/cpu_defines.h \
@@ -11,6 +11,27 @@ CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj: \
  C:/msys64/ucrt64/include/c++/16.1.0/bits/version.h \
  C:/msys64/ucrt64/include/c++/16.1.0/type_traits \
  C:/msys64/ucrt64/include/c++/16.1.0/ext/type_traits.h \
+ C:/msys64/ucrt64/include/math.h C:/msys64/ucrt64/include/crtdefs.h \
+ C:/msys64/ucrt64/include/corecrt.h C:/msys64/ucrt64/include/_mingw.h \
+ C:/msys64/ucrt64/include/_mingw_mac.h \
+ C:/msys64/ucrt64/include/_mingw_secapi.h \
+ C:/msys64/ucrt64/include/vadefs.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/std_abs.h \
+ C:/msys64/ucrt64/include/stdlib.h \
+ C:/msys64/ucrt64/include/corecrt_wstdlib.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/limits.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/syslimits.h \
+ C:/msys64/ucrt64/include/limits.h \
+ C:/msys64/ucrt64/include/sec_api/stdlib_s.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/stdlib.h \
+ C:/msys64/ucrt64/include/malloc.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/mm_malloc.h \
+ C:/msys64/ucrt64/include/errno.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/specfun.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/stdexcept_throw.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/exception_defines.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/stdexcept_throwfwd.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_algobase.h \
  C:/msys64/ucrt64/include/c++/16.1.0/ext/numeric_traits.h \
  C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_pair.h \
  C:/msys64/ucrt64/include/c++/16.1.0/bits/move.h \
@@ -28,50 +49,13 @@ CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj: \
  C:/msys64/ucrt64/include/c++/16.1.0/new \
  C:/msys64/ucrt64/include/c++/16.1.0/bits/exception.h \
  C:/msys64/ucrt64/include/c++/16.1.0/bits/new_except.h \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/exception_defines.h \
  C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_construct.h \
  C:/msys64/ucrt64/include/c++/16.1.0/debug/debug.h \
  C:/msys64/ucrt64/include/c++/16.1.0/bits/predefined_ops.h \
  C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_function.h \
  C:/msys64/ucrt64/include/c++/16.1.0/backward/binders.h \
  C:/msys64/ucrt64/include/c++/16.1.0/bit \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_algo.h \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/algorithmfwd.h \
- C:/msys64/ucrt64/include/c++/16.1.0/initializer_list \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_heap.h \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/uniform_int_dist.h \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_tempbuf.h \
- C:/msys64/ucrt64/include/c++/16.1.0/cstdlib \
- C:/msys64/ucrt64/include/stdlib.h C:/msys64/ucrt64/include/corecrt.h \
- C:/msys64/ucrt64/include/_mingw.h C:/msys64/ucrt64/include/_mingw_mac.h \
- C:/msys64/ucrt64/include/_mingw_secapi.h \
- C:/msys64/ucrt64/include/vadefs.h \
- C:/msys64/ucrt64/include/corecrt_wstdlib.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/limits.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/syslimits.h \
- C:/msys64/ucrt64/include/limits.h C:/msys64/ucrt64/include/crtdefs.h \
- C:/msys64/ucrt64/include/sec_api/stdlib_s.h \
- C:/msys64/ucrt64/include/c++/16.1.0/stdlib.h \
- C:/msys64/ucrt64/include/malloc.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/mm_malloc.h \
- C:/msys64/ucrt64/include/errno.h \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/std_abs.h \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/ranges_algo.h \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/ranges_algobase.h \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/ranges_base.h \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/max_size_type.h \
- C:/msys64/ucrt64/include/c++/16.1.0/numbers \
  C:/msys64/ucrt64/include/c++/16.1.0/limits \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/invoke.h \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/ranges_util.h \
- C:/msys64/ucrt64/include/c++/16.1.0/pstl/glue_algorithm_defs.h \
- C:/msys64/ucrt64/include/c++/16.1.0/pstl/execution_defs.h \
- C:/msys64/ucrt64/include/c++/16.1.0/cmath \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/requires_hosted.h \
- C:/msys64/ucrt64/include/math.h \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/specfun.h \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/stdexcept_throw.h \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/stdexcept_throwfwd.h \
  C:/msys64/ucrt64/include/c++/16.1.0/tr1/gamma.tcc \
  C:/msys64/ucrt64/include/c++/16.1.0/tr1/special_function_util.h \
  C:/msys64/ucrt64/include/c++/16.1.0/tr1/bessel_function.tcc \
@@ -83,4 +67,21 @@ CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj: \
  C:/msys64/ucrt64/include/c++/16.1.0/tr1/modified_bessel_func.tcc \
  C:/msys64/ucrt64/include/c++/16.1.0/tr1/poly_hermite.tcc \
  C:/msys64/ucrt64/include/c++/16.1.0/tr1/poly_laguerre.tcc \
- C:/msys64/ucrt64/include/c++/16.1.0/tr1/riemann_zeta.tcc
+ C:/msys64/ucrt64/include/c++/16.1.0/tr1/riemann_zeta.tcc \
+ C:/msys64/ucrt64/include/c++/16.1.0/algorithm \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_algo.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/algorithmfwd.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/initializer_list \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_heap.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/uniform_int_dist.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_tempbuf.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/cstdlib \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/ranges_algo.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/ranges_algobase.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/ranges_base.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/max_size_type.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/numbers \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/invoke.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/ranges_util.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/pstl/glue_algorithm_defs.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/pstl/execution_defs.h

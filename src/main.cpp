@@ -1,25 +1,27 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <vector>
 
 #include "PID.hpp"
 #include "Motor.hpp"
 #include "Drone.hpp"
+#include "Controller.hpp"
 
 int main(int, char**)
 {
     // CSV header 
     std::ofstream file("output.csv");
     file << "Time (s),"
-    << "Target Roll Angle (rad),"
-    << "Target Pitch Angle (rad),"
-    << "Target Yaw Angle (rad),"
-    << "Roll Angle (rad),"
-    << "Roll Velocity (rad/s),"
-    << "Pitch Angle (rad),"
-    << "Pitch Velocity (rad/s),"
-    << "Yaw Angle (rad),"
-    << "Yaw Velocity (rad/s),"
+    << "Target Roll Rate (deg/s),"
+    << "Target Pitch Rate (deg/s),"
+    << "Target Yaw Rate (deg/s),"
+    << "Roll Angle (deg),"
+    << "Roll Rate (deg/s),"
+    << "Pitch Angle (deg),"
+    << "Pitch Rate (deg/s),"
+    << "Yaw Angle (deg),"
+    << "Yaw Rate (deg/s),"
     << "FL Motor RPM,"
     << "FR Motor RPM,"
     << "RL Motor RPM,"
@@ -27,90 +29,81 @@ int main(int, char**)
     << "\n";
 
     // Simulation parameters
-    double dt = 0.001;
+    double dt = 0.00001;
     double simulationTime = 10.0;
 
     // Motor initialization
-    Motor motorFL(16.0, 4000.0, 1.8e-7, 0.048);
-    Motor motorFR(16.0, 4000.0, 1.8e-7, 0.048);
-    Motor motorRL(16.0, 4000.0, 1.8e-7, 0.048);
-    Motor motorRR(16.0, 4000.0, 1.8e-7, 0.048);
+    Motor motorFL(16.0, 4000.0, 1.8e-7, 0.9e-7, 2.4e-4);
+    Motor motorFR(16.0, 4000.0, 1.8e-7, 0.9e-7, 2.4e-4);
+    Motor motorRL(16.0, 4000.0, 1.8e-7, 0.9e-7, 2.4e-4);
+    Motor motorRR(16.0, 4000.0, 1.8e-7, 0.9e-7, 2.4e-4);
 
     // Drone initialization
     Drone drone(0.25, 0.003, 0.003, 0.006, motorFL, motorFR, motorRL, motorRR);
 
-    // Controller initialization
-    PID pidRoll(8.0, 0.1, 0.3);
-    PID pidPitch(8.0, 0.1, 0.3);
-    PID pidYaw(8.0, 0.1, 0.3);
+    // PID controller initialization
+    PID pidRollRate(50.0, 0.0, 0.0);
+    PID pidPitchRate(80.0, 0.0, 0.0);
+    PID pidYawRate(80.0, 0.0, 0.0);
 
-    double targetRollAngle = 0.0;
-    double targetPitchAngle = 0.0;
-    double targetYawAngle = 0.0;
-    double baseVoltage = 8.0;
+    // Command controller sequencing
+    std::vector<Step> steps = {
+        {0.0, 0.0, 0.0, 0.0},
+        {1.0, 1.0, 0.0, 0.0},
+        {2.0, 0.0, 1.0, 0.0},
+        {3.0, 0.0, 0.0, 2.0},
+        {4.0, 0.0, 0.0, 0.0},
+        {5.0, -3.0, -3.0, -5.0},
+        {6.0, 0.0, 0.0, 3.0},
+        {7.0, 0.0, 2.0, 0.0},
+        {8.0, 2.0, 0.0, 0.0},
+        {9.0, 0.0, 0.0, 0.0},
+    };
+
+    StepController stepController(steps);
+
+    double baseVoltage = 4.0;
 
     for (double t = 0.0; t < simulationTime; t +=dt)
     {
-        // Target sequencing
-        if (t < 2.0) 
-        {
-            targetRollAngle = 0.0;
-            targetPitchAngle = 0.0;
-            targetYawAngle = 0.0;
-        } else if (t < 4.0) 
-        {
-            targetRollAngle = 0.5;
-            targetPitchAngle = -0.5;
-            targetYawAngle = 1.0;
-        } else if (t < 6.0) 
-        {
-            targetRollAngle = 0.2;
-            targetPitchAngle = 0.5;
-            targetYawAngle = -1.0;
-        } else if (t < 8.0) 
-        {
-            targetRollAngle = -0.5;
-            targetPitchAngle = 0.2;
-            targetYawAngle = 2.0;
-        } else if (t < 10.0) 
-        {
-            targetRollAngle = 0.0;
-            targetPitchAngle = 0.0;
-            targetYawAngle = 0.0;
-        }
+        // Command controller
+        stepController.update(t);
+        double targetRollRate = stepController.getRollRateTarget();
+        double targetPitchRate = stepController.getPitchRateTarget();
+        double targetYawRate = stepController.getYawRateTarget();
 
         // Roll controller
-        double currentRollAngle = drone.getRollAngle();
-        double rollAngleError = pidRoll.update(targetRollAngle, currentRollAngle, dt);
+        double currentRollRate = drone.getRollRate();
+        double rollRateDelta = pidRollRate.update(targetRollRate, currentRollRate, dt);
 
         // Pitch controller
-        double currentPitchAngle = drone.getPitchAngle();
-        double pitchAngleError = pidPitch.update(targetPitchAngle, currentPitchAngle, dt);
+        double currentPitchRate = drone.getPitchRate();
+        double pitchRateDelta = pidPitchRate.update(targetPitchRate, currentPitchRate, dt);
 
         // Yaw controller
-        double currentYawAngle = drone.getYawAngle();
-        double yawAngleError = pidYaw.update(targetYawAngle, currentYawAngle, dt);
+        double currentYawRate = drone.getYawRate();
+        double yawRateDelta = pidYawRate.update(targetYawRate, currentYawRate, dt);
 
         // Voltage input
-        double voltageFL = baseVoltage + rollAngleError + pitchAngleError + yawAngleError;
-        double voltageFR = baseVoltage - rollAngleError + pitchAngleError - yawAngleError;
-        double voltageRL = baseVoltage + rollAngleError - pitchAngleError - yawAngleError;
-        double voltageRR = baseVoltage - rollAngleError - pitchAngleError + yawAngleError;
+        double voltageFL = baseVoltage + rollRateDelta + pitchRateDelta + yawRateDelta;
+        double voltageFR = baseVoltage - rollRateDelta + pitchRateDelta - yawRateDelta;
+        double voltageRL = baseVoltage + rollRateDelta - pitchRateDelta - yawRateDelta;
+        double voltageRR = baseVoltage - rollRateDelta - pitchRateDelta + yawRateDelta;
 
-        // Drone state update
+        // State update
         drone.update(voltageFL, voltageFR, voltageRL, voltageRR, dt);
 
         // CSV output
         file << t << ","
-        << targetRollAngle << ","
-        << targetPitchAngle << ","
-        << targetYawAngle << ","
-        << drone.getRollAngle() << ","
-        << drone.getRollVelocity() << ","
-        << drone.getPitchAngle() << ","
-        << drone.getPitchVelocity() << ","
-        << drone.getYawAngle() << ","
-        << drone.getYawVelocity() << ","
+        << targetRollRate << ","
+        << targetPitchRate << ","
+        << targetYawRate << ","
+        << drone.getRollAngleDeg() << ","
+        << drone.getRollRateDeg() << ","
+        << drone.getPitchAngleDeg() << ","
+        << drone.getPitchRateDeg() << ","
+        << drone.getYawAngleDeg() << ","
+        << drone.getYawRateDeg() << ","
         << motorFL.getRPM() << ","
         << motorFR.getRPM() << ","
         << motorRL.getRPM() << ","
@@ -118,6 +111,7 @@ int main(int, char**)
     }
 
     // Plotting
+    file.close();
     system("python ../scripts/plot.py");
 
     return 0;

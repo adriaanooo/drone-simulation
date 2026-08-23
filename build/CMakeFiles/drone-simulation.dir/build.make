@@ -71,11 +71,26 @@ include CMakeFiles/drone-simulation.dir/flags.make
 CMakeFiles/drone-simulation.dir/codegen:
 .PHONY : CMakeFiles/drone-simulation.dir/codegen
 
+CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj: CMakeFiles/drone-simulation.dir/flags.make
+CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj: CMakeFiles/drone-simulation.dir/includes_CXX.rsp
+CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj: C:/Users/adriv/PersonalProjects/drone-simulation/src/Controller.cpp
+CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj: CMakeFiles/drone-simulation.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj -MF CMakeFiles\drone-simulation.dir\src\Controller.cpp.obj.d -o CMakeFiles\drone-simulation.dir\src\Controller.cpp.obj -c C:\Users\adriv\PersonalProjects\drone-simulation\src\Controller.cpp
+
+CMakeFiles/drone-simulation.dir/src/Controller.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/drone-simulation.dir/src/Controller.cpp.i"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\adriv\PersonalProjects\drone-simulation\src\Controller.cpp > CMakeFiles\drone-simulation.dir\src\Controller.cpp.i
+
+CMakeFiles/drone-simulation.dir/src/Controller.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/drone-simulation.dir/src/Controller.cpp.s"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\adriv\PersonalProjects\drone-simulation\src\Controller.cpp -o CMakeFiles\drone-simulation.dir\src\Controller.cpp.s
+
 CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj: CMakeFiles/drone-simulation.dir/flags.make
 CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj: CMakeFiles/drone-simulation.dir/includes_CXX.rsp
 CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj: C:/Users/adriv/PersonalProjects/drone-simulation/src/Drone.cpp
 CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj: CMakeFiles/drone-simulation.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj"
 	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj -MF CMakeFiles\drone-simulation.dir\src\Drone.cpp.obj.d -o CMakeFiles\drone-simulation.dir\src\Drone.cpp.obj -c C:\Users\adriv\PersonalProjects\drone-simulation\src\Drone.cpp
 
 CMakeFiles/drone-simulation.dir/src/Drone.cpp.i: cmake_force
@@ -90,7 +105,7 @@ CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj: CMakeFiles/drone-simulation.d
 CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj: CMakeFiles/drone-simulation.dir/includes_CXX.rsp
 CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj: C:/Users/adriv/PersonalProjects/drone-simulation/src/Motor.cpp
 CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj: CMakeFiles/drone-simulation.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj"
 	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj -MF CMakeFiles\drone-simulation.dir\src\Motor.cpp.obj.d -o CMakeFiles\drone-simulation.dir\src\Motor.cpp.obj -c C:\Users\adriv\PersonalProjects\drone-simulation\src\Motor.cpp
 
 CMakeFiles/drone-simulation.dir/src/Motor.cpp.i: cmake_force
@@ -105,7 +120,7 @@ CMakeFiles/drone-simulation.dir/src/PID.cpp.obj: CMakeFiles/drone-simulation.dir
 CMakeFiles/drone-simulation.dir/src/PID.cpp.obj: CMakeFiles/drone-simulation.dir/includes_CXX.rsp
 CMakeFiles/drone-simulation.dir/src/PID.cpp.obj: C:/Users/adriv/PersonalProjects/drone-simulation/src/PID.cpp
 CMakeFiles/drone-simulation.dir/src/PID.cpp.obj: CMakeFiles/drone-simulation.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/drone-simulation.dir/src/PID.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/drone-simulation.dir/src/PID.cpp.obj"
 	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/drone-simulation.dir/src/PID.cpp.obj -MF CMakeFiles\drone-simulation.dir\src\PID.cpp.obj.d -o CMakeFiles\drone-simulation.dir\src\PID.cpp.obj -c C:\Users\adriv\PersonalProjects\drone-simulation\src\PID.cpp
 
 CMakeFiles/drone-simulation.dir/src/PID.cpp.i: cmake_force
@@ -120,7 +135,7 @@ CMakeFiles/drone-simulation.dir/src/main.cpp.obj: CMakeFiles/drone-simulation.di
 CMakeFiles/drone-simulation.dir/src/main.cpp.obj: CMakeFiles/drone-simulation.dir/includes_CXX.rsp
 CMakeFiles/drone-simulation.dir/src/main.cpp.obj: C:/Users/adriv/PersonalProjects/drone-simulation/src/main.cpp
 CMakeFiles/drone-simulation.dir/src/main.cpp.obj: CMakeFiles/drone-simulation.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/drone-simulation.dir/src/main.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/drone-simulation.dir/src/main.cpp.obj"
 	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/drone-simulation.dir/src/main.cpp.obj -MF CMakeFiles\drone-simulation.dir\src\main.cpp.obj.d -o CMakeFiles\drone-simulation.dir\src\main.cpp.obj -c C:\Users\adriv\PersonalProjects\drone-simulation\src\main.cpp
 
 CMakeFiles/drone-simulation.dir/src/main.cpp.i: cmake_force
@@ -133,6 +148,7 @@ CMakeFiles/drone-simulation.dir/src/main.cpp.s: cmake_force
 
 # Object files for target drone-simulation
 drone__simulation_OBJECTS = \
+"CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj" \
 "CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj" \
 "CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj" \
 "CMakeFiles/drone-simulation.dir/src/PID.cpp.obj" \
@@ -141,6 +157,7 @@ drone__simulation_OBJECTS = \
 # External object files for target drone-simulation
 drone__simulation_EXTERNAL_OBJECTS =
 
+drone-simulation.exe: CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj
 drone-simulation.exe: CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj
 drone-simulation.exe: CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj
 drone-simulation.exe: CMakeFiles/drone-simulation.dir/src/PID.cpp.obj
@@ -149,7 +166,7 @@ drone-simulation.exe: CMakeFiles/drone-simulation.dir/build.make
 drone-simulation.exe: CMakeFiles/drone-simulation.dir/linkLibs.rsp
 drone-simulation.exe: CMakeFiles/drone-simulation.dir/objects1.rsp
 drone-simulation.exe: CMakeFiles/drone-simulation.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable drone-simulation.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable drone-simulation.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\drone-simulation.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

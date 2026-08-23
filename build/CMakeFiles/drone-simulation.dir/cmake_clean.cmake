@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj"
+  "CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj.d"
   "CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj"
   "CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj.d"
   "CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj"

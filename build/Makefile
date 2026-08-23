@@ -129,6 +129,30 @@ drone-simulation/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/build
 .PHONY : drone-simulation/fast
 
+src/Controller.obj: src/Controller.cpp.obj
+.PHONY : src/Controller.obj
+
+# target to build an object file
+src/Controller.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj
+.PHONY : src/Controller.cpp.obj
+
+src/Controller.i: src/Controller.cpp.i
+.PHONY : src/Controller.i
+
+# target to preprocess a source file
+src/Controller.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/Controller.cpp.i
+.PHONY : src/Controller.cpp.i
+
+src/Controller.s: src/Controller.cpp.s
+.PHONY : src/Controller.s
+
+# target to generate assembly for a file
+src/Controller.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/Controller.cpp.s
+.PHONY : src/Controller.cpp.s
+
 src/Drone.obj: src/Drone.cpp.obj
 .PHONY : src/Drone.obj
 
@@ -234,6 +258,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... drone-simulation
+	@echo ... src/Controller.obj
+	@echo ... src/Controller.i
+	@echo ... src/Controller.s
 	@echo ... src/Drone.obj
 	@echo ... src/Drone.i
 	@echo ... src/Drone.s

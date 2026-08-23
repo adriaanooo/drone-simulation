@@ -2,29 +2,27 @@
 #include <algorithm>
 #include <cmath>
 
-Motor::Motor(double maxVoltage, double KV, double thrustCoefficient, double torqueCoefficient)
-    : maxVoltage(maxVoltage), KV(KV), thrustCoefficient(thrustCoefficient), torqueCoefficient(torqueCoefficient)
+Motor::Motor(double maxVoltage, double KV, double thrustCoefficient, double torqueCoefficient, double timeConstant)
+    : maxVoltage(maxVoltage), KV(KV), thrustCoefficient(thrustCoefficient), torqueCoefficient(torqueCoefficient), timeConstant(timeConstant)
 {
 }
 
-double Motor::getThrust(double appliedVoltage) 
+void Motor::update(double appliedVoltage, double dt)
 {
     double clampedVoltage = std::clamp(appliedVoltage, 0.0, maxVoltage);
+    double rpmCommand = clampedVoltage * KV;
+    double rotationalVelocityCommand = rpmCommand * 2 * M_PI / 60.0;
 
-    rpm = clampedVoltage * KV;
-
-    double radPerSec = rpm * (2.0 * M_PI / 60.0);
-    
-    return pow(radPerSec, 2) * thrustCoefficient;
+    rotationalAcceleration = (rotationalVelocityCommand - rotationalVelocity) / timeConstant;
+    rotationalVelocity += rotationalAcceleration * dt;
 }
 
-double Motor::getTorque(double appliedVoltage)
+double Motor::getThrust() 
 {
-    double clampedVoltage = std::clamp(appliedVoltage, 0.0, maxVoltage);
+    return pow(rotationalVelocity, 2) * thrustCoefficient;
+}
 
-    rpm = clampedVoltage * KV;
-
-    double radPerSec = rpm * (2.0 * M_PI / 60.0);
-
-    return pow(radPerSec, 2) * torqueCoefficient;
+double Motor::getTorque()
+{
+    return pow(rotationalVelocity, 2) * torqueCoefficient;
 }
