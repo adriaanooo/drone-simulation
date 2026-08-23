@@ -4,22 +4,33 @@
 class Drone {
 
     public:
-        Drone(double armLength, double inertiaXX, Motor& motorFL, Motor& motorFR);
+        Drone(double armLength, double inertiaXX, double inertiaYY, Motor& motorFL, Motor& motorFR, Motor& motorRL, Motor& motorRR);
 
-        void update(double voltageFL, double voltageFR, double dt);
+        void update(double voltageFL, double voltageFR, double voltageRL, double voltageRR, double dt);
 
-        double getXAngle() const { return xAngle; }
-        double getXAngularVelocity() const { return xAngularVelocity; }
-        double getXAngularAcceleration() const { return xAngularAcceleration; }
+        double getRollAngle() const { return rollAngle; }
+        double getRollVelocity() const { return rollVelocity; }
+        double getRollAcceleration() const { return rollAcceleration; }
+
+        double getPitchAngle() const { return pitchAngle; }
+        double getPitchVelocity() const { return pitchVelocity; }
+        double getPitchAcceleration() const { return pitchAcceleration; }
 
     private:
         double armLength;
         double inertiaXX;
+        double inertiaYY;
 
         Motor& motorFL;
         Motor& motorFR;
+        Motor& motorRL;
+        Motor& motorRR;
 
-        double xAngle{0.0};
-        double xAngularVelocity{0.0};
-        double xAngularAcceleration{0.0};
+        double rollAngle{0.0};
+        double rollVelocity{0.0};
+        double rollAcceleration{0.0};
+
+        double pitchAngle{0.0};
+        double pitchVelocity{0.0};
+        double pitchAcceleration{0.0};
 };
