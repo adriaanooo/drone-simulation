@@ -36,18 +36,18 @@ int main(int, char**)
     double simulationTime = 5.0;
 
     // Motor initialization
-    Motor motorFL(16.8, 5000.0, 2.3e-8, 3.5e-10, 1.0e-2);
-    Motor motorFR(16.8, 5000.0, 2.3e-8, 3.5e-10, 1.0e-2);
-    Motor motorRL(16.8, 5000.0, 2.3e-8, 3.5e-10, 1.0e-2);
-    Motor motorRR(16.8, 5000.0, 2.3e-8, 3.5e-10, 1.0e-2);
+    Motor motorFL(12.0, 4000.0, 2.7e-7, 2.4e-9, 1.0e-2);
+    Motor motorFR(12.0, 4000.0, 2.7e-7, 2.4e-9, 1.0e-2);
+    Motor motorRL(12.0, 4000.0, 2.7e-7, 2.4e-9, 1.0e-2);
+    Motor motorRR(12.0, 4000.0, 2.7e-7, 2.4e-9, 1.0e-2);
 
     // Drone initialization
-    Drone drone(0.220, 3.5e-4, 3.5e-4, 6.0e-4, motorFL, motorFR, motorRL, motorRR);
+    Drone drone(0.144, 0.000105, 0.000132, 0.000206, motorFL, motorFR, motorRL, motorRR);
 
     // PID controller initialization
-    PID pidRollRate(30.4, 1.0, 0.0266, 4000); // Ku = 38, Tu = 0.007
-    PID pidPitchRate(30.4, 1.0, 0.0266, 4000); // Ku = 38, Tu = 0.007
-    PID pidYawRate(10.0, 1.0, 0.0, 4000); // Ku = , Tu = 
+    PID pidRollRate(25.0, 0.1, 0.05, 4000); // Ku = 38, Tu = 0.007
+    PID pidPitchRate(25.0, 0.1, 0.06, 4000); // Ku = 38, Tu = 0.007
+    PID pidYawRate(10.0, 0.5, 0.0, 4000);
 
     // Command controller sequencing
     std::vector<Step> steps = {
@@ -64,7 +64,7 @@ int main(int, char**)
 
     StepController stepController(steps);
 
-    double baseVoltage = 10.0;
+    double baseVoltage = 2.8;
 
     for (double t = 0.0; t < simulationTime; t +=dt)
     {
@@ -77,15 +77,15 @@ int main(int, char**)
 
         // Roll controller
         double currentRollRate = drone.getRollRate();
-        double rollRateDelta = pidRollRate.update(targetRollRate, currentRollRate, t, dt, 6.9, -10);
+        double rollRateDelta = pidRollRate.update(targetRollRate, currentRollRate, t, dt, 9.2, -2.8);
 
         // Pitch controller
         double currentPitchRate = drone.getPitchRate();
-        double pitchRateDelta = pidPitchRate.update(targetPitchRate, currentPitchRate, t, dt, 6.9, -10);
+        double pitchRateDelta = pidPitchRate.update(targetPitchRate, currentPitchRate, t, dt, 9.2, -2.8);
 
         // Yaw controller
         double currentYawRate = drone.getYawRate();
-        double yawRateDelta = pidYawRate.update(targetYawRate, currentYawRate, t, dt, 6.9, -10);
+        double yawRateDelta = pidYawRate.update(targetYawRate, currentYawRate, t, dt, 9.2, -2.8);
 
         // Voltage input
         double voltageFL = baseVoltage + rollRateDelta + pitchRateDelta + yawRateDelta;

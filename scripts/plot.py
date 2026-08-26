@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 df = pd.read_csv("output.csv")
-df = df.iloc[::100].iloc[10:].copy()
+df = df.iloc[::100].copy()
 
 sns.set_style('darkgrid')
 
@@ -27,6 +27,12 @@ sns.lineplot(x=df['Time (s)'], y=df['PID Roll'], label='PID Roll', ax=axes[0, 1]
 sns.lineplot(x=df['Time (s)'], y=df['PID Pitch'], label='PID Pitch', ax=axes[1, 1])
 sns.lineplot(x=df['Time (s)'], y=df['PID Yaw'], label='PID Yaw', ax=axes[2, 1])
 
-plt.tight_layout()
-plt.legend()
+axes[3, 1].set_visible(False)
+
+for ax in axes.flat:
+    if ax.get_visible() and ax.get_legend_handles_labels()[0]:
+        ax.legend(bbox_to_anchor=(1.02, 1), loc='upper left', borderaxespad=0, fontsize=9)
+
+fig.subplots_adjust(wspace=0.55, hspace=0.5, left=0.08, right=0.82, top=0.95, bottom=0.08)
+
 plt.show()
