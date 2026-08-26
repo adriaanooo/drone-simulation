@@ -33,7 +33,7 @@ double PID::update(double setpoint, double measurement, double t, double dt, dou
 
         double output = std::clamp(proportionalOutput + integralOutput + derivativeOutput, minOutput, maxOutput);
 
-        integral += error * dt;
+        integral += error * dtControl;
         previousError = error;
         previousMeasurement = measurement;
         previousOutput = output;
