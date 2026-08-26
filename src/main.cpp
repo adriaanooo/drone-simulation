@@ -25,44 +25,46 @@ int main(int, char**)
     << "FL Motor RPM,"
     << "FR Motor RPM,"
     << "RL Motor RPM,"
-    << "RR Motor RPM"
+    << "RR Motor RPM,"
+    << "PID Roll,"
+    << "PID Pitch,"
+    << "PID Yaw"
     << "\n";
 
     // Simulation parameters
-    double dt = 0.00001;
-    double simulationTime = 10.0;
+    double dt = 1.0e-5;
+    double simulationTime = 5.0;
 
     // Motor initialization
-    Motor motorFL(16.0, 4000.0, 1.8e-7, 0.9e-7, 2.4e-4);
-    Motor motorFR(16.0, 4000.0, 1.8e-7, 0.9e-7, 2.4e-4);
-    Motor motorRL(16.0, 4000.0, 1.8e-7, 0.9e-7, 2.4e-4);
-    Motor motorRR(16.0, 4000.0, 1.8e-7, 0.9e-7, 2.4e-4);
+    Motor motorFL(16.8, 5000.0, 2.3e-8, 3.5e-10, 1.0e-2);
+    Motor motorFR(16.8, 5000.0, 2.3e-8, 3.5e-10, 1.0e-2);
+    Motor motorRL(16.8, 5000.0, 2.3e-8, 3.5e-10, 1.0e-2);
+    Motor motorRR(16.8, 5000.0, 2.3e-8, 3.5e-10, 1.0e-2);
 
     // Drone initialization
-    Drone drone(0.25, 0.003, 0.003, 0.006, motorFL, motorFR, motorRL, motorRR);
+    Drone drone(0.220, 3.5e-4, 3.5e-4, 6.0e-4, motorFL, motorFR, motorRL, motorRR);
 
     // PID controller initialization
-    PID pidRollRate(50.0, 0.0, 0.0);
-    PID pidPitchRate(80.0, 0.0, 0.0);
-    PID pidYawRate(80.0, 0.0, 0.0);
+    PID pidRollRate(30.4, 1.0, 0.0266, 4000); // Ku = 38, Tu = 0.007
+    PID pidPitchRate(30.4, 1.0, 0.0266, 4000); // Ku = 38, Tu = 0.007
+    PID pidYawRate(10.0, 1.0, 0.0, 4000); // Ku = , Tu = 
 
     // Command controller sequencing
     std::vector<Step> steps = {
-        {0.0, 0.0, 0.0, 0.0},
-        {1.0, 1.0, 0.0, 0.0},
-        {2.0, 0.0, 1.0, 0.0},
-        {3.0, 0.0, 0.0, 2.0},
-        {4.0, 0.0, 0.0, 0.0},
-        {5.0, -3.0, -3.0, -5.0},
-        {6.0, 0.0, 0.0, 3.0},
-        {7.0, 0.0, 2.0, 0.0},
-        {8.0, 2.0, 0.0, 0.0},
-        {9.0, 0.0, 0.0, 0.0},
+        {0.5, 5.0, 0.0, 0.0},
+        {1.0, -5.0, 0.0, 0.0},
+        {1.5, 0.0, 5.0, 0.0},
+        {2.0, 0.0, -5.0, 0.0},
+        {2.5, 0.0, 0.0, 10.0},
+        {3.0, 0.0, 0.0, -10.0},
+        {3.5, -5.0, -5.0, -10.0},
+        {4.0, 5.0, 5.0, 10.0},
+        {4.5, 0.0, 0.0, 0.0},
     };
 
     StepController stepController(steps);
 
-    double baseVoltage = 4.0;
+    double baseVoltage = 10.0;
 
     for (double t = 0.0; t < simulationTime; t +=dt)
     {
@@ -72,17 +74,18 @@ int main(int, char**)
         double targetPitchRate = stepController.getPitchRateTarget();
         double targetYawRate = stepController.getYawRateTarget();
 
+
         // Roll controller
         double currentRollRate = drone.getRollRate();
-        double rollRateDelta = pidRollRate.update(targetRollRate, currentRollRate, dt);
+        double rollRateDelta = pidRollRate.update(targetRollRate, currentRollRate, t, dt, 6.9, -10);
 
         // Pitch controller
         double currentPitchRate = drone.getPitchRate();
-        double pitchRateDelta = pidPitchRate.update(targetPitchRate, currentPitchRate, dt);
+        double pitchRateDelta = pidPitchRate.update(targetPitchRate, currentPitchRate, t, dt, 6.9, -10);
 
         // Yaw controller
         double currentYawRate = drone.getYawRate();
-        double yawRateDelta = pidYawRate.update(targetYawRate, currentYawRate, dt);
+        double yawRateDelta = pidYawRate.update(targetYawRate, currentYawRate, t, dt, 6.9, -10);
 
         // Voltage input
         double voltageFL = baseVoltage + rollRateDelta + pitchRateDelta + yawRateDelta;
@@ -95,9 +98,9 @@ int main(int, char**)
 
         // CSV output
         file << t << ","
-        << targetRollRate << ","
-        << targetPitchRate << ","
-        << targetYawRate << ","
+        << targetRollRate * 180.0 / M_PI << ","
+        << targetPitchRate * 180.0 / M_PI << ","
+        << targetYawRate * 180.0 / M_PI << ","
         << drone.getRollAngleDeg() << ","
         << drone.getRollRateDeg() << ","
         << drone.getPitchAngleDeg() << ","
@@ -107,7 +110,10 @@ int main(int, char**)
         << motorFL.getRPM() << ","
         << motorFR.getRPM() << ","
         << motorRL.getRPM() << ","
-        << motorRR.getRPM() << "\n";
+        << motorRR.getRPM() << ","
+        << rollRateDelta << ","
+        << pitchRateDelta << ","
+        << yawRateDelta << "\n";
     }
 
     // Plotting
