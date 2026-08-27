@@ -80,6 +80,7 @@ CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj: C:/Users/adriv/PersonalProjec
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Drone.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/IMU.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Motor.hpp \
+  C:/Users/adriv/PersonalProjects/drone-simulation/include/Vector3.hpp \
   C:/msys64/ucrt64/include/_mingw.h \
   C:/msys64/ucrt64/include/_mingw_mac.h \
   C:/msys64/ucrt64/include/_mingw_off_t.h \
@@ -319,6 +320,7 @@ CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj: C:/Users/adriv/PersonalProjec
 
 CMakeFiles/drone-simulation.dir/src/IMU.cpp.obj: C:/Users/adriv/PersonalProjects/drone-simulation/src/IMU.cpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/IMU.hpp \
+  C:/Users/adriv/PersonalProjects/drone-simulation/include/Vector3.hpp \
   C:/msys64/ucrt64/include/_mingw.h \
   C:/msys64/ucrt64/include/_mingw_mac.h \
   C:/msys64/ucrt64/include/_mingw_off_t.h \
@@ -670,7 +672,11 @@ CMakeFiles/drone-simulation.dir/src/PID.cpp.obj: C:/Users/adriv/PersonalProjects
   C:/msys64/ucrt64/include/c++/16.1.0/bits/ranges_base.h \
   C:/msys64/ucrt64/include/c++/16.1.0/bits/ranges_cmp.h \
   C:/msys64/ucrt64/include/c++/16.1.0/bits/ranges_util.h \
+  C:/msys64/ucrt64/include/c++/16.1.0/bits/requires_hosted.h \
+  C:/msys64/ucrt64/include/c++/16.1.0/bits/specfun.h \
   C:/msys64/ucrt64/include/c++/16.1.0/bits/std_abs.h \
+  C:/msys64/ucrt64/include/c++/16.1.0/bits/stdexcept_throw.h \
+  C:/msys64/ucrt64/include/c++/16.1.0/bits/stdexcept_throwfwd.h \
   C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_algo.h \
   C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_algobase.h \
   C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_construct.h \
@@ -684,6 +690,7 @@ CMakeFiles/drone-simulation.dir/src/PID.cpp.obj: C:/Users/adriv/PersonalProjects
   C:/msys64/ucrt64/include/c++/16.1.0/bits/uniform_int_dist.h \
   C:/msys64/ucrt64/include/c++/16.1.0/bits/utility.h \
   C:/msys64/ucrt64/include/c++/16.1.0/bits/version.h \
+  C:/msys64/ucrt64/include/c++/16.1.0/cmath \
   C:/msys64/ucrt64/include/c++/16.1.0/compare \
   C:/msys64/ucrt64/include/c++/16.1.0/concepts \
   C:/msys64/ucrt64/include/c++/16.1.0/cstdlib \
@@ -699,6 +706,18 @@ CMakeFiles/drone-simulation.dir/src/PID.cpp.obj: C:/Users/adriv/PersonalProjects
   C:/msys64/ucrt64/include/c++/16.1.0/pstl/glue_algorithm_defs.h \
   C:/msys64/ucrt64/include/c++/16.1.0/pstl/pstl_config.h \
   C:/msys64/ucrt64/include/c++/16.1.0/stdlib.h \
+  C:/msys64/ucrt64/include/c++/16.1.0/tr1/bessel_function.tcc \
+  C:/msys64/ucrt64/include/c++/16.1.0/tr1/beta_function.tcc \
+  C:/msys64/ucrt64/include/c++/16.1.0/tr1/ell_integral.tcc \
+  C:/msys64/ucrt64/include/c++/16.1.0/tr1/exp_integral.tcc \
+  C:/msys64/ucrt64/include/c++/16.1.0/tr1/gamma.tcc \
+  C:/msys64/ucrt64/include/c++/16.1.0/tr1/hypergeometric.tcc \
+  C:/msys64/ucrt64/include/c++/16.1.0/tr1/legendre_function.tcc \
+  C:/msys64/ucrt64/include/c++/16.1.0/tr1/modified_bessel_func.tcc \
+  C:/msys64/ucrt64/include/c++/16.1.0/tr1/poly_hermite.tcc \
+  C:/msys64/ucrt64/include/c++/16.1.0/tr1/poly_laguerre.tcc \
+  C:/msys64/ucrt64/include/c++/16.1.0/tr1/riemann_zeta.tcc \
+  C:/msys64/ucrt64/include/c++/16.1.0/tr1/special_function_util.h \
   C:/msys64/ucrt64/include/c++/16.1.0/type_traits \
   C:/msys64/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/c++config.h \
   C:/msys64/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/cpu_defines.h \
@@ -709,6 +728,7 @@ CMakeFiles/drone-simulation.dir/src/PID.cpp.obj: C:/Users/adriv/PersonalProjects
   C:/msys64/ucrt64/include/errno.h \
   C:/msys64/ucrt64/include/limits.h \
   C:/msys64/ucrt64/include/malloc.h \
+  C:/msys64/ucrt64/include/math.h \
   C:/msys64/ucrt64/include/sec_api/stdlib_s.h \
   C:/msys64/ucrt64/include/stdlib.h \
   C:/msys64/ucrt64/include/vadefs.h \
@@ -722,6 +742,7 @@ CMakeFiles/drone-simulation.dir/src/main.cpp.obj: C:/Users/adriv/PersonalProject
   C:/Users/adriv/PersonalProjects/drone-simulation/include/IMU.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Motor.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/PID.hpp \
+  C:/Users/adriv/PersonalProjects/drone-simulation/include/Vector3.hpp \
   C:/msys64/ucrt64/include/_mingw.h \
   C:/msys64/ucrt64/include/_mingw_mac.h \
   C:/msys64/ucrt64/include/_mingw_off_t.h \
@@ -1174,6 +1195,8 @@ C:/msys64/ucrt64/include/c++/16.1.0/istream:
 C:/Users/adriv/PersonalProjects/drone-simulation/include/Drone.hpp:
 
 C:/Users/adriv/PersonalProjects/drone-simulation/include/Motor.hpp:
+
+C:/Users/adriv/PersonalProjects/drone-simulation/include/Vector3.hpp:
 
 C:/msys64/ucrt64/include/_mingw_off_t.h:
 

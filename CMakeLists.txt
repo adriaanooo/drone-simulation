@@ -14,7 +14,8 @@ file(GLOB SOURCES CONFIGURE_DEPENDS
 
 add_executable(drone-simulation ${SOURCES}
     include/IMU.hpp
-    src/IMU.cpp)
+    src/IMU.cpp
+    include/Vector3.hpp)
 
 target_include_directories(drone-simulation PRIVATE
     include

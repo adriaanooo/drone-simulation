@@ -2,18 +2,14 @@
 
 #include <random>
 #include <chrono>
-
-struct Vector3
-{
-    double x {0.0}, y {0.0}, z {0.0};
-};
+#include "Vector3.hpp"
 
 class IMU
 {
     public:
         IMU(double gyroNoiseSigma, double gyroUpdateRate);
 
-        Vector3 update(Vector3 angularRate, double dt);
+        void update(Vector3 angularRate, double dt);
 
         Vector3 getAngularRate() const { return angularRateMeasured; }
 

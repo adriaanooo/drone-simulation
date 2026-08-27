@@ -1,11 +1,9 @@
 #include "Drone.hpp"
 #include <cmath>
 
-Drone::Drone(double armLength, double inertiaXX, double inertiaYY, double inertiaZZ, Motor& motorFL, Motor& motorFR, Motor& motorRL, Motor& motorRR, IMU& imu)
+Drone::Drone(double armLength, const Vector3& inertia, Motor& motorFL, Motor& motorFR, Motor& motorRL, Motor& motorRR, IMU& imu)
     : armLength(armLength),
-    inertiaXX(inertiaXX),
-    inertiaYY(inertiaYY),
-    inertiaZZ(inertiaZZ),
+    inertia(inertia),
     motorFL(motorFL),
     motorFR(motorFR),
     motorRL(motorRL),
@@ -33,25 +31,24 @@ void Drone::update(double voltageFL, double voltageFR, double voltageRL, double 
     // Roll
     double netRollTorque = (thrustFL + thrustRL - thrustFR - thrustRR) * armLength * sin(M_PI / 4);
 
-    rollAcceleration = netRollTorque / inertiaXX;
-    rollRate += rollAcceleration * dt;
-    rollAngle += rollRate * dt;
+    angularAcceleration.x = netRollTorque / inertia.x;
+    angularRate.x += angularAcceleration.x * dt;
+    angle.x += angularRate.x * dt;
 
     // Pitch
     double netPitchTorque = (thrustFL + thrustFR - thrustRL - thrustRR) * armLength * sin(M_PI / 4);
 
-    pitchAcceleration = netPitchTorque / inertiaYY;
-    pitchRate += pitchAcceleration * dt;
-    pitchAngle += pitchRate * dt;
+    angularAcceleration.y = netPitchTorque / inertia.y;
+    angularRate.y += angularAcceleration.y * dt;
+    angle.y += angularRate.y * dt;
 
     // Yaw
     double netYawTorque = (torqueFL + torqueRR - torqueFR - torqueRL);
 
-    yawAcceleration = netYawTorque / inertiaZZ;
-    yawRate += yawAcceleration * dt;
-    yawAngle += yawRate * dt;
+    angularAcceleration.z = netYawTorque / inertia.z;
+    angularRate.z += angularAcceleration.z * dt;
+    angle.z += angularRate.z * dt;
 
     // Sensor simulation
-    Vector3 angularRate(rollRate, pitchRate, yawRate);
     imu.update(angularRate, dt);
 }

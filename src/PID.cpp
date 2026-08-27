@@ -1,16 +1,12 @@
 #include "PID.hpp"
 #include <algorithm>
+#include <cmath>
 
 PID::PID(double kp, double ki, double kd, double updateRate): 
     kp(kp),
     ki(ki),
     kd(kd),
-    updatePeriod(1.0 / updateRate),
-    integral(0.0),
-    previousError(0.0),
-    previousMeasurement(0.0),
-    previousOutput(0.0),
-    timeSinceLastUpdate(0.0)
+    updatePeriod(1.0 / updateRate)
 {
 }
 
@@ -26,6 +22,7 @@ double PID::update(double setpoint, double measurement, double t, double dt, dou
 
         double error = setpoint - measurement;
         double derivative = -(measurement - previousMeasurement) / dtControl;
+
 
         double proportionalOutput = kp * error;
         double integralOutput = ki * integral;

@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <vector>
 
+#include "Vector3.hpp"
 #include "PID.hpp"
 #include "Motor.hpp"
 #include "IMU.hpp"
@@ -43,14 +44,15 @@ int main(int, char**)
     Motor motorRR(12.0, 4000.0, 2.7e-7, 2.4e-9, 1.0e-2);
 
     // IMU initialization
-    IMU imu(0.02, 1000);
+    IMU imu(8.73e-4, 1000);
 
     // Drone initialization
-    Drone drone(0.144, 0.000105, 0.000132, 0.000206, motorFL, motorFR, motorRL, motorRR, imu);
+    const Vector3 inertiaTensor = {0.000105, 0.000132, 0.000206};
+    Drone drone(0.144, inertiaTensor, motorFL, motorFR, motorRL, motorRR, imu);
 
     // PID controller initialization
-    PID pidRollRate(25.0, 0.1, 0.05, 4000); // Ku = 38, Tu = 0.007
-    PID pidPitchRate(25.0, 0.1, 0.06, 4000); // Ku = 38, Tu = 0.007
+    PID pidRollRate(25.0, 0.1, 0.006, 4000); // Ku = 38, Tu = 0.007
+    PID pidPitchRate(25.0, 0.1, 0.005, 4000); // Ku = 38, Tu = 0.007
     PID pidYawRate(10.0, 0.5, 0.0, 4000);
 
     // Command controller sequencing
@@ -105,12 +107,12 @@ int main(int, char**)
         << targetRollRate * 180.0 / M_PI << ","
         << targetPitchRate * 180.0 / M_PI << ","
         << targetYawRate * 180.0 / M_PI << ","
-        << drone.getRollAngleDeg() << ","
-        << drone.getRollRateDeg() << ","
-        << drone.getPitchAngleDeg() << ","
-        << drone.getPitchRateDeg() << ","
-        << drone.getYawAngleDeg() << ","
-        << drone.getYawRateDeg() << ","
+        << drone.getAngleDeg().x << ","
+        << drone.getRateDeg().x << ","
+        << drone.getAngleDeg().y << ","
+        << drone.getRateDeg().y << ","
+        << drone.getAngleDeg().z << ","
+        << drone.getRateDeg().z << ","
         << motorFL.getRPM() << ","
         << motorFR.getRPM() << ","
         << motorRL.getRPM() << ","

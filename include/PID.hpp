@@ -15,9 +15,9 @@ class PID
         double kd;
         double updatePeriod;
 
-        double integral;
-        double previousError;
-        double previousMeasurement;
-        double previousOutput;
-        double timeSinceLastUpdate;
+        double integral{0.0};
+        double previousError{0.0};
+        double previousMeasurement{0.0};
+        double previousOutput{0.0};
+        double timeSinceLastUpdate{0.0};
 };

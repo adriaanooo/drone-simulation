@@ -233,4 +233,5 @@ CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj: \
  C:/msys64/ucrt64/include/c++/16.1.0/bits/formatfwd.h \
  C:/msys64/ucrt64/include/c++/16.1.0/bits/ranges_algobase.h \
  C:/msys64/ucrt64/include/c++/16.1.0/bits/unicode.h \
- C:/msys64/ucrt64/include/c++/16.1.0/bits/unicode-data.h
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/unicode-data.h \
+ C:/Users/adriv/PersonalProjects/drone-simulation/include/Vector3.hpp

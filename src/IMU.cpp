@@ -10,7 +10,7 @@ IMU::IMU(double gyroNoiseSigma, double gyroUpdateRate)
     gen.seed(std::chrono::steady_clock::now().time_since_epoch().count());
 }
 
-Vector3 IMU::update(Vector3 angularRate, double dt)
+void IMU::update(Vector3 angularRate, double dt)
 {
     timeSinceLastUpdate += dt;
 
@@ -21,6 +21,4 @@ Vector3 IMU::update(Vector3 angularRate, double dt)
         angularRateMeasured.z = angularRate.z + noise(gen);
         timeSinceLastUpdate = 0.0;
     }
-
-    return angularRateMeasured;
 }

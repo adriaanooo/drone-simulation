@@ -1,43 +1,30 @@
 #pragma once
+
 #include "Motor.hpp"
 #include "IMU.hpp"
+#include "Vector3.hpp"
+#include <cmath>
+
+static constexpr double RAD_TO_DEG = 180.0 / M_PI;
 
 class Drone
 {
     public:
-        Drone(double armLength, double inertiaXX, double inertiaYY, double inertiaZZ, Motor& motorFL, Motor& motorFR, Motor& motorRL, Motor& motorRR, IMU& imu);
+        Drone(double armLength, const Vector3& inertia, Motor& motorFL, Motor& motorFR, Motor& motorRL, Motor& motorRR, IMU& imu);
 
         void update(double voltageFL, double voltageFR, double voltageRL, double voltageRR, double dt);
 
-        double getRollAngle() const { return rollAngle; }
-        double getRollRate() const { return rollRate; }
-        double getRollAcceleration() const { return rollAcceleration; }
+        const Vector3& getAngle() const { return angle; }
+        const Vector3& getAngularRate() const { return angularRate; }
+        const Vector3& getAngularAcceleration() const { return angularAcceleration; }
 
-        double getPitchAngle() const { return pitchAngle; }
-        double getPitchRate() const { return pitchRate; }
-        double getPitchAcceleration() const { return pitchAcceleration; }
-
-        double getYawAngle() const { return yawAngle; }
-        double getYawRate() const { return yawRate; }
-        double getYawAcceleration() const { return yawAcceleration; }
-
-        double getRollAngleDeg() const { return rollAngle * 180.0 / M_PI; }
-        double getRollRateDeg() const { return rollRate * 180.0 / M_PI; }
-        double getRollAccelerationDeg() const { return rollAcceleration * 180.0 / M_PI; }
-
-        double getPitchAngleDeg() const { return pitchAngle * 180.0 / M_PI; }
-        double getPitchRateDeg() const { return pitchRate * 180.0 / M_PI; }
-        double getPitchAccelerationDeg() const { return pitchAcceleration * 180.0 / M_PI; }
-
-        double getYawAngleDeg() const { return yawAngle * 180.0 / M_PI; }
-        double getYawRateDeg() const { return yawRate * 180.0 / M_PI; }
-        double getYawAccelerationDeg() const { return yawAcceleration * 180.0 / M_PI; }
+        Vector3 getAngleDeg() const { return angle * RAD_TO_DEG; }
+        Vector3 getRateDeg() const { return angularRate * RAD_TO_DEG; }
+        Vector3 getAccelerationDeg() const { return angularAcceleration * RAD_TO_DEG; }
 
     private:
         double armLength;
-        double inertiaXX;
-        double inertiaYY;
-        double inertiaZZ;
+        const Vector3& inertia;
 
         Motor& motorFL;
         Motor& motorFR;
@@ -45,15 +32,7 @@ class Drone
         Motor& motorRR;
         IMU& imu;
 
-        double rollAngle{0.0};
-        double rollRate{0.0};
-        double rollAcceleration{0.0};
-
-        double pitchAngle{0.0};
-        double pitchRate{0.0};
-        double pitchAcceleration{0.0};
-
-        double yawAngle{0.0};
-        double yawRate{0.0};
-        double yawAcceleration{0.0};
+        Vector3 angle{0.0, 0.0, 0.0};
+        Vector3 angularRate{0.0, 0.0, 0.0};
+        Vector3 angularAcceleration{0.0, 0.0, 0.0};
 };
