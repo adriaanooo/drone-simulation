@@ -181,5 +181,60 @@ CMakeFiles/drone-simulation.dir/src/main.cpp.obj: \
  C:/msys64/ucrt64/include/c++/16.1.0/tr1/poly_hermite.tcc \
  C:/msys64/ucrt64/include/c++/16.1.0/tr1/poly_laguerre.tcc \
  C:/msys64/ucrt64/include/c++/16.1.0/tr1/riemann_zeta.tcc \
+ C:/Users/adriv/PersonalProjects/drone-simulation/include/IMU.hpp \
+ C:/msys64/ucrt64/include/c++/16.1.0/random \
+ C:/msys64/ucrt64/include/c++/16.1.0/cstdint \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdint.h \
+ C:/msys64/ucrt64/include/stdint.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/random.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/uniform_int_dist.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/opt_random.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/pmmintrin.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/emmintrin.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/xmmintrin.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/mmintrin.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/mwaitintrin.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/random.tcc \
+ C:/msys64/ucrt64/include/c++/16.1.0/numeric \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_numeric.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/pstl/glue_numeric_defs.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/pstl/execution_defs.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/chrono \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/chrono.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/ratio \
+ C:/msys64/ucrt64/include/c++/16.1.0/ctime \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/parse_numbers.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_algo.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/algorithmfwd.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_heap.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/stl_tempbuf.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/sstream \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/sstream.tcc \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/shared_ptr.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/shared_ptr_base.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/allocated_ptr.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/refwrap.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/unique_ptr.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/ext/aligned_buffer.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/ext/concurrence.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/align.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/chrono_io.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/format \
+ C:/msys64/ucrt64/include/c++/16.1.0/array \
+ C:/msys64/ucrt64/include/c++/16.1.0/charconv \
+ C:/msys64/ucrt64/include/c++/16.1.0/locale \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/locale_facets_nonio.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/time_members.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/messages_members.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/locale_facets_nonio.tcc \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/locale_conv.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/optional \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/enable_special_members.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/span \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/monostate.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/formatfwd.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/ranges_algobase.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/unicode.h \
+ C:/msys64/ucrt64/include/c++/16.1.0/bits/unicode-data.h \
  C:/Users/adriv/PersonalProjects/drone-simulation/include/Drone.hpp \
  C:/Users/adriv/PersonalProjects/drone-simulation/include/Controller.hpp

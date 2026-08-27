@@ -5,6 +5,7 @@
 
 #include "PID.hpp"
 #include "Motor.hpp"
+#include "IMU.hpp"
 #include "Drone.hpp"
 #include "Controller.hpp"
 
@@ -41,8 +42,11 @@ int main(int, char**)
     Motor motorRL(12.0, 4000.0, 2.7e-7, 2.4e-9, 1.0e-2);
     Motor motorRR(12.0, 4000.0, 2.7e-7, 2.4e-9, 1.0e-2);
 
+    // IMU initialization
+    IMU imu(0.02, 1000);
+
     // Drone initialization
-    Drone drone(0.144, 0.000105, 0.000132, 0.000206, motorFL, motorFR, motorRL, motorRR);
+    Drone drone(0.144, 0.000105, 0.000132, 0.000206, motorFL, motorFR, motorRL, motorRR, imu);
 
     // PID controller initialization
     PID pidRollRate(25.0, 0.1, 0.05, 4000); // Ku = 38, Tu = 0.007
@@ -76,15 +80,15 @@ int main(int, char**)
 
 
         // Roll controller
-        double currentRollRate = drone.getRollRate();
+        double currentRollRate = imu.getAngularRate().x;
         double rollRateDelta = pidRollRate.update(targetRollRate, currentRollRate, t, dt, 9.2, -2.8);
 
         // Pitch controller
-        double currentPitchRate = drone.getPitchRate();
+        double currentPitchRate = imu.getAngularRate().y;
         double pitchRateDelta = pidPitchRate.update(targetPitchRate, currentPitchRate, t, dt, 9.2, -2.8);
 
         // Yaw controller
-        double currentYawRate = drone.getYawRate();
+        double currentYawRate = imu.getAngularRate().z;
         double yawRateDelta = pidYawRate.update(targetYawRate, currentYawRate, t, dt, 9.2, -2.8);
 
         // Voltage input

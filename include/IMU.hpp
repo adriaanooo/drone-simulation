@@ -11,20 +11,24 @@ struct Vector3
 class IMU
 {
     public:
-        double update(double rollActual, double pitchActual, double yawActual);
+        IMU(double gyroNoiseSigma, double gyroUpdateRate);
+
+        Vector3 update(Vector3 angularRate, double dt);
+
+        Vector3 getAngularRate() const { return angularRateMeasured; }
 
     private:
-        Vector3 gyroBias;
+        Vector3 gyroError;
 
-        double gyroNoiseStd;
-        double walkStd;
+        double gyroNoiseSigma;
+        double gyroUpdateRate;
+        double gyroUpdatePeriod;
 
         std::mt19937 gen;
-        std::normal_distribution<double> dist;
+        std::normal_distribution<double> noise;
 
-        const Vector3 gravity{0.0, 0.0, -9.81};
+        Vector3 angularRateMeasured{0.0, 0.0, 0.0};
+        Vector3 previousAngulareRateMeasured{0.0, 0.0, 0.0};
 
-        double nextGaussian() {
-            return dist(gen);
-        }
+        double timeSinceLastUpdate{0.0};
 };

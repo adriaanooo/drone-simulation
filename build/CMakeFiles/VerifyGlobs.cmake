@@ -6,6 +6,7 @@ file(GLOB NEW_GLOB LIST_DIRECTORIES true "C:/Users/adriv/PersonalProjects/drone-
 set(OLD_GLOB
   "C:/Users/adriv/PersonalProjects/drone-simulation/src/Controller.cpp"
   "C:/Users/adriv/PersonalProjects/drone-simulation/src/Drone.cpp"
+  "C:/Users/adriv/PersonalProjects/drone-simulation/src/IMU.cpp"
   "C:/Users/adriv/PersonalProjects/drone-simulation/src/Motor.cpp"
   "C:/Users/adriv/PersonalProjects/drone-simulation/src/PID.cpp"
   "C:/Users/adriv/PersonalProjects/drone-simulation/src/main.cpp"

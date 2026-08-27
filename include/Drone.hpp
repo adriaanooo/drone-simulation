@@ -1,10 +1,11 @@
 #pragma once
 #include "Motor.hpp"
+#include "IMU.hpp"
 
 class Drone
 {
     public:
-        Drone(double armLength, double inertiaXX, double inertiaYY, double inertiaZZ, Motor& motorFL, Motor& motorFR, Motor& motorRL, Motor& motorRR);
+        Drone(double armLength, double inertiaXX, double inertiaYY, double inertiaZZ, Motor& motorFL, Motor& motorFR, Motor& motorRL, Motor& motorRR, IMU& imu);
 
         void update(double voltageFL, double voltageFR, double voltageRL, double voltageRR, double dt);
 
@@ -42,6 +43,7 @@ class Drone
         Motor& motorFR;
         Motor& motorRL;
         Motor& motorRR;
+        IMU& imu;
 
         double rollAngle{0.0};
         double rollRate{0.0};

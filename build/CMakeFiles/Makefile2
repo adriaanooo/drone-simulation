@@ -84,12 +84,12 @@ clean: CMakeFiles/drone-simulation.dir/clean
 CMakeFiles/drone-simulation.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=1,2,3,4,5,6 "Built target drone-simulation"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target drone-simulation"
 .PHONY : CMakeFiles/drone-simulation.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/drone-simulation.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/drone-simulation.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles 0
 .PHONY : CMakeFiles/drone-simulation.dir/rule
@@ -101,7 +101,7 @@ drone-simulation: CMakeFiles/drone-simulation.dir/rule
 # codegen rule for target.
 CMakeFiles/drone-simulation.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=1,2,3,4,5,6 "Finished codegen for target drone-simulation"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Users\adriv\PersonalProjects\drone-simulation\build\CMakeFiles --progress-num=1,2,3,4,5,6,7 "Finished codegen for target drone-simulation"
 .PHONY : CMakeFiles/drone-simulation.dir/codegen
 
 # clean rule for target.
