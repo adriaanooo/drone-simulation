@@ -9,6 +9,7 @@
 #include "IMU.hpp"
 #include "Drone.hpp"
 #include "Controller.hpp"
+#include "LowPassFilter.h"
 
 int main(int, char**)
 {
@@ -43,17 +44,20 @@ int main(int, char**)
     Motor motorRL(12.0, 4000.0, 2.7e-7, 2.4e-9, 1.0e-2);
     Motor motorRR(12.0, 4000.0, 2.7e-7, 2.4e-9, 1.0e-2);
 
+    // LPF initialization
+    LowPassFilter lowPassFilter(0.1);
+
     // IMU initialization
-    IMU imu(8.73e-4, 1000);
+    IMU imu(4.88e-4, 1000); // 8.73e-4
 
     // Drone initialization
     const Vector3 inertiaTensor = {0.000105, 0.000132, 0.000206};
-    Drone drone(0.144, inertiaTensor, motorFL, motorFR, motorRL, motorRR, imu);
+    Drone drone(0.144, inertiaTensor, motorFL, motorFR, motorRL, motorRR, imu, lowPassFilter);
 
     // PID controller initialization
-    PID pidRollRate(25.0, 0.1, 0.006, 4000); // Ku = 38, Tu = 0.007
-    PID pidPitchRate(25.0, 0.1, 0.005, 4000); // Ku = 38, Tu = 0.007
-    PID pidYawRate(10.0, 0.5, 0.0, 4000);
+    PID pidRollRate(1.0, 0.1, 0.005, 400); // Ku = 38, Tu = 0.007
+    PID pidPitchRate(1.0, 0.1, 0.005, 400); // Ku = 38, Tu = 0.007
+    PID pidYawRate(1.0, 0.1, 0.0, 400);
 
     // Command controller sequencing
     std::vector<Step> steps = {
@@ -82,15 +86,15 @@ int main(int, char**)
 
 
         // Roll controller
-        double currentRollRate = imu.getAngularRate().x;
+        double currentRollRate = lowPassFilter.getOutput().x;
         double rollRateDelta = pidRollRate.update(targetRollRate, currentRollRate, t, dt, 9.2, -2.8);
 
         // Pitch controller
-        double currentPitchRate = imu.getAngularRate().y;
+        double currentPitchRate = lowPassFilter.getOutput().y;
         double pitchRateDelta = pidPitchRate.update(targetPitchRate, currentPitchRate, t, dt, 9.2, -2.8);
 
         // Yaw controller
-        double currentYawRate = imu.getAngularRate().z;
+        double currentYawRate = lowPassFilter.getOutput().z;
         double yawRateDelta = pidYawRate.update(targetYawRate, currentYawRate, t, dt, 9.2, -2.8);
 
         // Voltage input

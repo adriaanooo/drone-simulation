@@ -201,6 +201,30 @@ src/IMU.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/IMU.cpp.s
 .PHONY : src/IMU.cpp.s
 
+src/LowPassFilter.obj: src/LowPassFilter.cpp.obj
+.PHONY : src/LowPassFilter.obj
+
+# target to build an object file
+src/LowPassFilter.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/LowPassFilter.cpp.obj
+.PHONY : src/LowPassFilter.cpp.obj
+
+src/LowPassFilter.i: src/LowPassFilter.cpp.i
+.PHONY : src/LowPassFilter.i
+
+# target to preprocess a source file
+src/LowPassFilter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/LowPassFilter.cpp.i
+.PHONY : src/LowPassFilter.cpp.i
+
+src/LowPassFilter.s: src/LowPassFilter.cpp.s
+.PHONY : src/LowPassFilter.s
+
+# target to generate assembly for a file
+src/LowPassFilter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/LowPassFilter.cpp.s
+.PHONY : src/LowPassFilter.cpp.s
+
 src/Motor.obj: src/Motor.cpp.obj
 .PHONY : src/Motor.obj
 
@@ -291,6 +315,9 @@ help:
 	@echo ... src/IMU.obj
 	@echo ... src/IMU.i
 	@echo ... src/IMU.s
+	@echo ... src/LowPassFilter.obj
+	@echo ... src/LowPassFilter.i
+	@echo ... src/LowPassFilter.s
 	@echo ... src/Motor.obj
 	@echo ... src/Motor.i
 	@echo ... src/Motor.s

@@ -79,6 +79,7 @@ CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj: C:/Users/adriv/PersonalP
 CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj: C:/Users/adriv/PersonalProjects/drone-simulation/src/Drone.cpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Drone.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/IMU.hpp \
+  C:/Users/adriv/PersonalProjects/drone-simulation/include/LowPassFilter.h \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Motor.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Vector3.hpp \
   C:/msys64/ucrt64/include/_mingw.h \
@@ -558,6 +559,10 @@ CMakeFiles/drone-simulation.dir/src/IMU.cpp.obj: C:/Users/adriv/PersonalProjects
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/syslimits.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/xmmintrin.h
 
+CMakeFiles/drone-simulation.dir/src/LowPassFilter.cpp.obj: C:/Users/adriv/PersonalProjects/drone-simulation/src/LowPassFilter.cpp \
+  C:/Users/adriv/PersonalProjects/drone-simulation/include/LowPassFilter.h \
+  C:/Users/adriv/PersonalProjects/drone-simulation/include/Vector3.hpp
+
 CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj: C:/Users/adriv/PersonalProjects/drone-simulation/src/Motor.cpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Motor.hpp \
   C:/msys64/ucrt64/include/_mingw.h \
@@ -740,6 +745,7 @@ CMakeFiles/drone-simulation.dir/src/main.cpp.obj: C:/Users/adriv/PersonalProject
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Controller.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Drone.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/IMU.hpp \
+  C:/Users/adriv/PersonalProjects/drone-simulation/include/LowPassFilter.h \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Motor.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/PID.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Vector3.hpp \
@@ -1194,6 +1200,8 @@ C:/msys64/ucrt64/include/c++/16.1.0/istream:
 
 C:/Users/adriv/PersonalProjects/drone-simulation/include/Drone.hpp:
 
+C:/Users/adriv/PersonalProjects/drone-simulation/include/LowPassFilter.h:
+
 C:/Users/adriv/PersonalProjects/drone-simulation/include/Motor.hpp:
 
 C:/Users/adriv/PersonalProjects/drone-simulation/include/Vector3.hpp:
@@ -1443,6 +1451,8 @@ C:/msys64/ucrt64/include/pthread_time.h:
 C:/msys64/ucrt64/include/pthread_unistd.h:
 
 C:/msys64/ucrt64/include/sched.h:
+
+C:/Users/adriv/PersonalProjects/drone-simulation/src/LowPassFilter.cpp:
 
 C:/msys64/ucrt64/include/sec_api/stdio_s.h:
 
