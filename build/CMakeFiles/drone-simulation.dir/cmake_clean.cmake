@@ -5,8 +5,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj.d"
   "CMakeFiles/drone-simulation.dir/src/IMU.cpp.obj"
   "CMakeFiles/drone-simulation.dir/src/IMU.cpp.obj.d"
-  "CMakeFiles/drone-simulation.dir/src/LowPassFilter.cpp.obj"
-  "CMakeFiles/drone-simulation.dir/src/LowPassFilter.cpp.obj.d"
   "CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj"
   "CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj.d"
   "CMakeFiles/drone-simulation.dir/src/PID.cpp.obj"

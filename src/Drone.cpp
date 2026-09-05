@@ -1,15 +1,13 @@
 #include "Drone.hpp"
 #include <cmath>
 
-Drone::Drone(double armLength, const Vector3& inertia, Motor& motorFL, Motor& motorFR, Motor& motorRL, Motor& motorRR, IMU& imu, LowPassFilter& lowPassFilter)
+Drone::Drone(double armLength, const Vector3& inertia, Motor& motorFL, Motor& motorFR, Motor& motorRL, Motor& motorRR)
     : armLength(armLength),
     inertia(inertia),
     motorFL(motorFL),
     motorFR(motorFR),
     motorRL(motorRL),
-    motorRR(motorRR),
-    imu(imu),
-    lowPassFilter(lowPassFilter)
+    motorRR(motorRR)
 {
 }
 
@@ -49,8 +47,4 @@ void Drone::update(double voltageFL, double voltageFR, double voltageRL, double 
     angularAcceleration.z = netYawTorque / inertia.z;
     angularRate.z += angularAcceleration.z * dt;
     angle.z += angularRate.z * dt;
-
-    // Sensor simulation
-    imu.update(angularRate, dt);
-    lowPassFilter.update(imu.getAngularRate());
 }

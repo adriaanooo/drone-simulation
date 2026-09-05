@@ -12,8 +12,7 @@ file(GLOB SOURCES CONFIGURE_DEPENDS
     "src/*.cpp"
 )
 
-add_executable(drone-simulation ${SOURCES}
-    src/LowPassFilter.cpp)
+add_executable(drone-simulation ${SOURCES})
 
 target_include_directories(drone-simulation PRIVATE
     include

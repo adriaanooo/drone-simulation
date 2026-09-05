@@ -238,5 +238,4 @@ CMakeFiles/drone-simulation.dir/src/main.cpp.obj: \
  C:/msys64/ucrt64/include/c++/16.1.0/bits/unicode.h \
  C:/msys64/ucrt64/include/c++/16.1.0/bits/unicode-data.h \
  C:/Users/adriv/PersonalProjects/drone-simulation/include/Drone.hpp \
- C:/Users/adriv/PersonalProjects/drone-simulation/include/LowPassFilter.h \
  C:/Users/adriv/PersonalProjects/drone-simulation/include/Controller.hpp
