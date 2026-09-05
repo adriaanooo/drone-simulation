@@ -53,9 +53,9 @@ int main(int, char**)
     Drone drone(0.144, inertiaTensor, motorFL, motorFR, motorRL, motorRR);
 
     // PID controller initialization
-    PID pidRollRate(0.2, 0.1, 0.001, 400, derivativeCutoffFreq); // Ku = 38, Tu = 0.007
-    PID pidPitchRate(0.2, 0.1, 0.001, 400, derivativeCutoffFreq); // Ku = 38, Tu = 0.007
-    PID pidYawRate(0.8, 0.1, 0.0, 400, derivativeCutoffFreq);
+    PID pidRollRate(0.1, 0.1, 0.002, 400, derivativeCutoffFreq);
+    PID pidPitchRate(0.2, 0.1, 0.003, 400, derivativeCutoffFreq);
+    PID pidYawRate(0.4, 0.1, 0.0, 400, derivativeCutoffFreq);
 
     // Command controller sequencing
     std::vector<Step> steps = {

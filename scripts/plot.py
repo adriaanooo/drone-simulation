@@ -10,9 +10,9 @@ sns.set_style('darkgrid')
 fig, axes = plt.subplots(4, 2)
 axes.ravel()
 
-sns.lineplot(x=df['Time (s)'], y=df['Target Roll Rate (deg/s)'], label='Target Roll Angle (deg)', ax=axes[0, 0])
-sns.lineplot(x=df['Time (s)'], y=df['Target Pitch Rate (deg/s)'], label='Target Pitch Angle (deg)', ax=axes[0, 0])
-sns.lineplot(x=df['Time (s)'], y=df['Target Yaw Rate (deg/s)'], label='Target Yaw Angle (deg)', ax=axes[0, 0])
+sns.lineplot(x=df['Time (s)'], y=df['Target Roll Rate (deg/s)'], label='Target Roll Rate (deg/s)', ax=axes[0, 0])
+sns.lineplot(x=df['Time (s)'], y=df['Target Pitch Rate (deg/s)'], label='Target Pitch Rate (deg/s)', ax=axes[0, 0])
+sns.lineplot(x=df['Time (s)'], y=df['Target Yaw Rate (deg/s)'], label='Target Yaw Rate (deg/s)', ax=axes[0, 0])
 sns.lineplot(x=df['Time (s)'], y=df['Roll Angle (deg)'], label='Roll Angle (deg)', ax=axes[2, 0])
 sns.lineplot(x=df['Time (s)'], y=df['Roll Rate (deg/s)'], label='Roll Velocity (deg/s)', ax=axes[1, 0])
 sns.lineplot(x=df['Time (s)'], y=df['Pitch Angle (deg)'], label='Pitch Angle (deg)', ax=axes[2, 0])
@@ -26,6 +26,11 @@ sns.lineplot(x=df['Time (s)'], y=df['RR Motor RPM'], label='RR Motor RPM', ax=ax
 sns.lineplot(x=df['Time (s)'], y=df['PID Roll'], label='PID Roll', ax=axes[0, 1])
 sns.lineplot(x=df['Time (s)'], y=df['PID Pitch'], label='PID Pitch', ax=axes[1, 1])
 sns.lineplot(x=df['Time (s)'], y=df['PID Yaw'], label='PID Yaw', ax=axes[2, 1])
+
+axes[0, 0].set_ylabel('Angular Rate Target (deg/s)')
+axes[1, 0].set_ylabel('Angular Rate (deg/s)')
+axes[2, 0].set_ylabel('Angle (deg)')
+axes[3, 0].set_ylabel('Motor RPM')
 
 axes[3, 1].set_visible(False)
 
