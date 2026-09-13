@@ -12,7 +12,7 @@ PID::PID(double kp, double ki, double kd, double updateRate, double derivativeCu
 {
 }
 
-double PID::update(double setpoint, double measurement, double t, double dt, double maxOutput, double minOutput)
+double PID::update(double setpoint, double measurement, double t, double dt)
 {
     timeSinceLastUpdate += dt;
 
@@ -38,7 +38,7 @@ double PID::update(double setpoint, double measurement, double t, double dt, dou
         double derivativeOutput = kd * derivative;
 
         // Output clamping to prevent integral windup
-        double output = std::clamp(proportionalOutput + integralOutput + derivativeOutput, minOutput, maxOutput);
+        double output = std::clamp(proportionalOutput + integralOutput + derivativeOutput, -1.0, 1.0);
 
         // Integral calculation
         integral += error * dtControl;

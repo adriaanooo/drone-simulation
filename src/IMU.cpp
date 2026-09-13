@@ -2,7 +2,10 @@
 #include <random>
 #include <chrono>
 
-IMU::IMU(double gyroNoiseSigma, double gyroUpdateRate)
+IMU::IMU(
+    double gyroNoiseSigma, 
+    double gyroUpdateRate
+)
     : gyroNoiseSigma(gyroNoiseSigma),
     noise(0.0, gyroNoiseSigma),
     gyroUpdatePeriod(1 / gyroUpdateRate)

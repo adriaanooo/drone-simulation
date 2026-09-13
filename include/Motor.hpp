@@ -4,15 +4,18 @@
 class Motor
 {
     public:
-        Motor(double maxVoltage, double KV, double thrustCoefficient, double torqueCoefficient, double timeConstant);
+        Motor(double KV, double thrustCoefficient, double torqueCoefficient, double timeConstant);
 
         void update(double appliedVoltage, double dt);
+
+        double getKV() const { return KV; }
+        double getThrustCoefficient() const { return thrustCoefficient; }
+
         double getThrust();
         double getTorque();
         double getRPM() const { return rotationalVelocity * 60.0 / (2 * M_PI); }
 
     private:
-        double maxVoltage;
         double KV;
         double thrustCoefficient;
         double torqueCoefficient;

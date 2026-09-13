@@ -27,3 +27,11 @@ class StepController
         double pitchRateTarget{0.0};
         double yawRateTarget{0.0};
 };
+
+class UserInputController
+{
+    public:
+        UserInputController();
+
+        void update(double time);
+};

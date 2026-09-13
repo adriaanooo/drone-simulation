@@ -5,7 +5,7 @@ class PID
     public:
         PID(double kp, double ki, double kd, double updateRate, const double derivativeCutoffFreq);
 
-        double update(double setpoint, double measurement, double t, double dt, double maxOutput, double minOutput);
+        double update(double setpoint, double measurement, double t, double dt);
 
     private:
         double kp;

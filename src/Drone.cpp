@@ -1,21 +1,43 @@
 #include "Drone.hpp"
 #include <cmath>
 
-Drone::Drone(double armLength, const Vector3& inertia, Motor& motorFL, Motor& motorFR, Motor& motorRL, Motor& motorRR)
-    : armLength(armLength),
+Drone::Drone(
+    double mass, 
+    double armLength, 
+    const Vector3& inertia, 
+    Motor& motorFL, 
+    Motor& motorFR, 
+    Motor& motorRL, 
+    Motor& motorRR,
+    ESC& escFL,
+    ESC& escFR,
+    ESC& escRL,
+    ESC& escRR
+)
+    : mass(mass),
+    armLength(armLength),
     inertia(inertia),
     motorFL(motorFL),
     motorFR(motorFR),
     motorRL(motorRL),
-    motorRR(motorRR)
+    motorRR(motorRR),
+    escFL(escFL),
+    escFR(escFR),
+    escRL(escRL),
+    escRR(escRR)
 {
 }
 
-void Drone::update(double voltageFL, double voltageFR, double voltageRL, double voltageRR, double dt) {
-    motorFL.update(voltageFL, dt);
-    motorFR.update(voltageFR, dt);
-    motorRL.update(voltageRL, dt);
-    motorRR.update(voltageRR, dt);
+void Drone::update(double escCommandFL, double escCommandFR, double escCommandRL, double escCommandRR, double dt) {
+    escFL.update(escCommandFL, dt);
+    escFR.update(escCommandFR, dt);
+    escRL.update(escCommandRL, dt);
+    escRR.update(escCommandRR, dt);
+
+    motorFL.update(escFL.getVoltageOutput(), dt);
+    motorFR.update(escFR.getVoltageOutput(), dt);
+    motorRL.update(escRL.getVoltageOutput(), dt);
+    motorRR.update(escRR.getVoltageOutput(), dt);
 
     double thrustFL = motorFL.getThrust();
     double thrustFR = motorFR.getThrust();
@@ -26,6 +48,36 @@ void Drone::update(double voltageFL, double voltageFR, double voltageRL, double 
     double torqueFR = motorFR.getTorque();
     double torqueRL = motorRL.getTorque();
     double torqueRR = motorRR.getTorque();
+
+    double netThrust = thrustFL + thrustFR + thrustRL + thrustRR;
+
+    // X
+    acceleration.x = (netThrust / mass) * 
+    (
+        cos(angle.z) * sin(angle.y) * cos(angle.x)
+        + sin(angle.z) * sin(angle.x)
+    );
+    velocity.x += acceleration.x * dt;
+    position.x += velocity.x * dt;
+
+    // Y
+    acceleration.y =
+        (netThrust / mass) *
+        (
+            sin(angle.z) * sin(angle.y) * cos(angle.x)
+            - cos(angle.z) * sin(angle.x)
+        );
+    velocity.y += acceleration.y * dt;
+    position.y += velocity.y * dt;
+
+    // Z
+    acceleration.z =
+        (netThrust / mass) *
+        (
+            cos(angle.y) * cos(angle.x)
+        ) - 9.81;
+    velocity.z += acceleration.z * dt;
+    position.z += velocity.z * dt;
 
     // Roll
     double netRollTorque = (thrustFL + thrustRL - thrustFR - thrustRR) * armLength * sin(M_PI / 4);

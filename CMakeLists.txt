@@ -12,7 +12,9 @@ file(GLOB SOURCES CONFIGURE_DEPENDS
     "src/*.cpp"
 )
 
-add_executable(drone-simulation ${SOURCES})
+add_executable(drone-simulation ${SOURCES}
+    include/ESC.hpp
+    src/ESC.cpp)
 
 target_include_directories(drone-simulation PRIVATE
     include

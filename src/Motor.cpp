@@ -2,15 +2,22 @@
 #include <algorithm>
 #include <cmath>
 
-Motor::Motor(double maxVoltage, double KV, double thrustCoefficient, double torqueCoefficient, double timeConstant)
-    : maxVoltage(maxVoltage), KV(KV), thrustCoefficient(thrustCoefficient), torqueCoefficient(torqueCoefficient), timeConstant(timeConstant)
+Motor::Motor(
+    double KV, 
+    double thrustCoefficient, 
+    double torqueCoefficient, 
+    double timeConstant
+)
+    : KV(KV), 
+    thrustCoefficient(thrustCoefficient), 
+    torqueCoefficient(torqueCoefficient), 
+    timeConstant(timeConstant)
 {
 }
 
 void Motor::update(double appliedVoltage, double dt)
 {
-    double clampedVoltage = std::clamp(appliedVoltage, 0.0, maxVoltage);
-    double rpmCommand = clampedVoltage * KV;
+    double rpmCommand = appliedVoltage * KV;
     double rotationalVelocityCommand = rpmCommand * 2 * M_PI / 60.0;
 
     rotationalAcceleration = (rotationalVelocityCommand - rotationalVelocity) / timeConstant;
