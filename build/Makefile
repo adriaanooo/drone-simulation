@@ -177,6 +177,30 @@ src/Drone.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/Drone.cpp.s
 .PHONY : src/Drone.cpp.s
 
+src/ESC.obj: src/ESC.cpp.obj
+.PHONY : src/ESC.obj
+
+# target to build an object file
+src/ESC.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/ESC.cpp.obj
+.PHONY : src/ESC.cpp.obj
+
+src/ESC.i: src/ESC.cpp.i
+.PHONY : src/ESC.i
+
+# target to preprocess a source file
+src/ESC.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/ESC.cpp.i
+.PHONY : src/ESC.cpp.i
+
+src/ESC.s: src/ESC.cpp.s
+.PHONY : src/ESC.s
+
+# target to generate assembly for a file
+src/ESC.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\drone-simulation.dir\build.make CMakeFiles/drone-simulation.dir/src/ESC.cpp.s
+.PHONY : src/ESC.cpp.s
+
 src/IMU.obj: src/IMU.cpp.obj
 .PHONY : src/IMU.obj
 
@@ -288,6 +312,9 @@ help:
 	@echo ... src/Drone.obj
 	@echo ... src/Drone.i
 	@echo ... src/Drone.s
+	@echo ... src/ESC.obj
+	@echo ... src/ESC.i
+	@echo ... src/ESC.s
 	@echo ... src/IMU.obj
 	@echo ... src/IMU.i
 	@echo ... src/IMU.s

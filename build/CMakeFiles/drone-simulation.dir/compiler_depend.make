@@ -78,6 +78,7 @@ CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj: C:/Users/adriv/PersonalP
 
 CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj: C:/Users/adriv/PersonalProjects/drone-simulation/src/Drone.cpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Drone.hpp \
+  C:/Users/adriv/PersonalProjects/drone-simulation/include/ESC.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/IMU.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Motor.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Vector3.hpp \
@@ -317,6 +318,9 @@ CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj: C:/Users/adriv/PersonalProjec
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/stdint.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/syslimits.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/xmmintrin.h
+
+CMakeFiles/drone-simulation.dir/src/ESC.cpp.obj: C:/Users/adriv/PersonalProjects/drone-simulation/src/ESC.cpp \
+  C:/Users/adriv/PersonalProjects/drone-simulation/include/ESC.hpp
 
 CMakeFiles/drone-simulation.dir/src/IMU.cpp.obj: C:/Users/adriv/PersonalProjects/drone-simulation/src/IMU.cpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/IMU.hpp \
@@ -840,6 +844,7 @@ CMakeFiles/drone-simulation.dir/src/PID.cpp.obj: C:/Users/adriv/PersonalProjects
 CMakeFiles/drone-simulation.dir/src/main.cpp.obj: C:/Users/adriv/PersonalProjects/drone-simulation/src/main.cpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Controller.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Drone.hpp \
+  C:/Users/adriv/PersonalProjects/drone-simulation/include/ESC.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/IMU.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/Motor.hpp \
   C:/Users/adriv/PersonalProjects/drone-simulation/include/PID.hpp \
@@ -1295,6 +1300,8 @@ C:/msys64/ucrt64/include/c++/16.1.0/istream:
 
 C:/Users/adriv/PersonalProjects/drone-simulation/include/Drone.hpp:
 
+C:/Users/adriv/PersonalProjects/drone-simulation/include/ESC.hpp:
+
 C:/Users/adriv/PersonalProjects/drone-simulation/include/Motor.hpp:
 
 C:/Users/adriv/PersonalProjects/drone-simulation/include/Vector3.hpp:
@@ -1579,6 +1586,10 @@ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/pmmintrin.h:
 
 C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/16.1.0/include/xmmintrin.h:
 
+C:/msys64/ucrt64/include/c++/16.1.0/bits/fstream.tcc:
+
+C:/Users/adriv/PersonalProjects/drone-simulation/src/ESC.cpp:
+
 C:/Users/adriv/PersonalProjects/drone-simulation/src/IMU.cpp:
 
 C:/Users/adriv/PersonalProjects/drone-simulation/src/Motor.cpp:
@@ -1592,8 +1603,6 @@ C:/Users/adriv/PersonalProjects/drone-simulation/src/PID.cpp:
 C:/Users/adriv/PersonalProjects/drone-simulation/include/PID.hpp:
 
 C:/msys64/ucrt64/include/c++/16.1.0/iostream:
-
-C:/msys64/ucrt64/include/c++/16.1.0/bits/fstream.tcc:
 
 C:/msys64/ucrt64/include/c++/16.1.0/x86_64-w64-mingw32/bits/basic_file.h:
 
