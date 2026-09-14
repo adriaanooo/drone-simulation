@@ -14,7 +14,9 @@ file(GLOB SOURCES CONFIGURE_DEPENDS
 
 add_executable(drone-simulation ${SOURCES}
     include/ESC.hpp
-    src/ESC.cpp)
+    src/ESC.cpp
+    include/FlightController.hpp
+    src/FlightController.cpp)
 
 target_include_directories(drone-simulation PRIVATE
     include

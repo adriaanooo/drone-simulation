@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/adriv/PersonalProjects/drone-simulation/src/Controller.cpp" "CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj" "gcc" "CMakeFiles/drone-simulation.dir/src/Controller.cpp.obj.d"
   "C:/Users/adriv/PersonalProjects/drone-simulation/src/Drone.cpp" "CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj" "gcc" "CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj.d"
   "C:/Users/adriv/PersonalProjects/drone-simulation/src/ESC.cpp" "CMakeFiles/drone-simulation.dir/src/ESC.cpp.obj" "gcc" "CMakeFiles/drone-simulation.dir/src/ESC.cpp.obj.d"
+  "C:/Users/adriv/PersonalProjects/drone-simulation/src/FlightController.cpp" "CMakeFiles/drone-simulation.dir/src/FlightController.cpp.obj" "gcc" "CMakeFiles/drone-simulation.dir/src/FlightController.cpp.obj.d"
   "C:/Users/adriv/PersonalProjects/drone-simulation/src/IMU.cpp" "CMakeFiles/drone-simulation.dir/src/IMU.cpp.obj" "gcc" "CMakeFiles/drone-simulation.dir/src/IMU.cpp.obj.d"
   "C:/Users/adriv/PersonalProjects/drone-simulation/src/Motor.cpp" "CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj" "gcc" "CMakeFiles/drone-simulation.dir/src/Motor.cpp.obj.d"
   "C:/Users/adriv/PersonalProjects/drone-simulation/src/PID.cpp" "CMakeFiles/drone-simulation.dir/src/PID.cpp.obj" "gcc" "CMakeFiles/drone-simulation.dir/src/PID.cpp.obj.d"

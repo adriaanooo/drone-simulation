@@ -9,6 +9,7 @@
 #include "IMU.hpp"
 #include "Drone.hpp"
 #include "Controller.hpp"
+#include "FlightController.hpp"
 
 int main(int, char**)
 {
@@ -40,7 +41,8 @@ int main(int, char**)
     const double dt = 1.0e-5;
     const double simulationTime = 5.0;
     const double imuUpdateRate = 1000; // Hz
-    const double escUpdateRate = 400; //Hz
+    const double escUpdateRate = 400; // Hz
+    const double flightControllerUpdateRate = 4000; // Hz
     const double derivativeCutoffFreq = 20.0; // Hz
 
     // Motor initialization
@@ -57,6 +59,20 @@ int main(int, char**)
 
     // IMU initialization
     IMU imu(4.88e-4, imuUpdateRate); // 8.73e-4
+
+    // PID controller initialization
+    PID rollRateController(0.04, 0.01, 0.0005, 400, derivativeCutoffFreq);
+    PID pitchRateController(0.05, 0.01, 0.0005, 400, derivativeCutoffFreq);
+    PID yawRateController(0.05, 0.01, 0.0, 400, derivativeCutoffFreq);
+
+    // Flight controller initialization
+    FlightController flightController(
+        flightControllerUpdateRate,
+        imu,
+        rollRateController,
+        pitchRateController,
+        yawRateController
+    );
 
     // Drone initialization
     const Vector3 inertiaTensor = {
@@ -79,10 +95,6 @@ int main(int, char**)
         escRR
     );
 
-    // PID controller initialization
-    PID pidRollRate(0.01, 0.1, 0.00005, 400, derivativeCutoffFreq);
-    PID pidPitchRate(0.01, 0.1, 0.00005, 400, derivativeCutoffFreq);
-    PID pidYawRate(0.07, 0.1, 0.0, 400, derivativeCutoffFreq);
 
     // Command controller sequencing
     std::vector<Step> steps = {
@@ -106,53 +118,34 @@ int main(int, char**)
     {
         // Command controller
         stepController.update(t);
-        double targetRollRate = stepController.getRollRateTarget();
-        double targetPitchRate = stepController.getPitchRateTarget();
-        double targetYawRate = stepController.getYawRateTarget();
+        Vector3 angularRateTarget{
+            stepController.getRollRateTarget(),
+            stepController.getPitchRateTarget(),
+            stepController.getYawRateTarget()
+        };
 
-        // Roll controller
-        double currentRollRate = imu.getAngularRate().x;
-        double rollRateDelta = pidRollRate.update(targetRollRate, currentRollRate, t, dt);
-
-        // Pitch controller
-        double currentPitchRate = imu.getAngularRate().y;
-        double pitchRateDelta = pidPitchRate.update(targetPitchRate, currentPitchRate, t, dt);
-
-        // Yaw controller
-        double currentYawRate = imu.getAngularRate().z;
-        double yawRateDelta = pidYawRate.update(targetYawRate, currentYawRate, t, dt);
-
-        // Motor mixer
-        double escCommandFL = std::clamp(
-            hoverThrottle + rollRateDelta + pitchRateDelta + yawRateDelta,
-            0.0,
-            1.0
-        );
-        double escCommandFR = std::clamp(
-            hoverThrottle - rollRateDelta + pitchRateDelta - yawRateDelta,
-            0.0,
-            1.0
-        );
-        double escCommandRL = std::clamp(
-            hoverThrottle + rollRateDelta - pitchRateDelta - yawRateDelta,
-            0.0,
-            1.0
-        );
-        double escCommandRR = std::clamp(
-            hoverThrottle - rollRateDelta - pitchRateDelta + yawRateDelta,
-            0.0,
-            1.0
+        // Flight controller
+        flightController.update(
+            hoverThrottle,
+            drone.getAngularRate(),
+            angularRateTarget,
+            dt
         );
 
         // State update
-        drone.update(escCommandFL, escCommandFR, escCommandRL, escCommandRR, dt);
-        imu.update(drone.getAngularRate(), dt);
+        drone.update(
+            flightController.getESCCommandFL(),
+            flightController.getESCCommandFR(),
+            flightController.getESCCommandRL(),
+            flightController.getESCCommandRR(),
+            dt
+        );
 
         // CSV output
         file << t << ","
-        << targetRollRate * 180.0 / M_PI << ","
-        << targetPitchRate * 180.0 / M_PI << ","
-        << targetYawRate * 180.0 / M_PI << ","
+        << angularRateTarget.x * 180.0 / M_PI << ","
+        << angularRateTarget.y * 180.0 / M_PI << ","
+        << angularRateTarget.z * 180.0 / M_PI << ","
         << drone.getAngleDeg().x << ","
         << drone.getRateDeg().x << ","
         << drone.getAngleDeg().y << ","
@@ -163,9 +156,9 @@ int main(int, char**)
         << motorFR.getRPM() << ","
         << motorRL.getRPM() << ","
         << motorRR.getRPM() << ","
-        << rollRateDelta << ","
-        << pitchRateDelta << ","
-        << yawRateDelta << ","
+        << flightController.getPIDOutput().x << ","
+        << flightController.getPIDOutput().y << ","
+        << flightController.getPIDOutput().z << ","
         << imu.getAngularRate().x << ","
         << imu.getAngularRate().y << ","
         << imu.getAngularRate().z << "\n";

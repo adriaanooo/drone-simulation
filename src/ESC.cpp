@@ -16,6 +16,6 @@ void ESC::update(double throttleInput, double dt)
     if (timeSinceLastUpdate >= updatePeriod)
     {
         voltageOutput = throttleInput * maxVoltage;
-        timeSinceLastUpdate = 0.0;
+        timeSinceLastUpdate -= updatePeriod;
     }
 }

@@ -2,7 +2,7 @@
 
 #include "Motor.hpp"
 #include "IMU.hpp"
-#include "ESC.hpp"
+#include "FlightController.hpp"
 #include "Vector3.hpp"
 #include <cmath>
 

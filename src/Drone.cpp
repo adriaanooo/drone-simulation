@@ -28,7 +28,8 @@ Drone::Drone(
 {
 }
 
-void Drone::update(double escCommandFL, double escCommandFR, double escCommandRL, double escCommandRR, double dt) {
+void Drone::update(double escCommandFL, double escCommandFR, double escCommandRL, double escCommandRR, double dt)
+{
     escFL.update(escCommandFL, dt);
     escFR.update(escCommandFR, dt);
     escRL.update(escCommandRL, dt);
