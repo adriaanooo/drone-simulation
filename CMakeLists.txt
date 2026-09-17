@@ -16,7 +16,8 @@ add_executable(drone-simulation ${SOURCES}
     include/ESC.hpp
     src/ESC.cpp
     include/FlightController.hpp
-    src/FlightController.cpp)
+    src/FlightController.cpp
+    include/Quaternion.hpp)
 
 target_include_directories(drone-simulation PRIVATE
     include
