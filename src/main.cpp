@@ -20,11 +20,8 @@ int main(int, char**)
     << "Target Roll Rate (deg/s),"
     << "Target Pitch Rate (deg/s),"
     << "Target Yaw Rate (deg/s),"
-    << "Roll Angle (deg),"
     << "Roll Rate (deg/s),"
-    << "Pitch Angle (deg),"
     << "Pitch Rate (deg/s),"
-    << "Yaw Angle (deg),"
     << "Yaw Rate (deg/s),"
     << "FL Motor RPM,"
     << "FR Motor RPM,"
@@ -82,36 +79,25 @@ int main(int, char**)
         {0.0, 0.0, 0.000206}
     }};
 
-    Drone drone(
-        0.144, 
-        0.075, 
-        inertiaTensor, 
-        motorFL,
-        motorFR,
-        motorRL, 
-        motorRR,
-        escFL,
-        escFR,
-        escRL,
-        escRR
-    );
+    Drone drone(0.144, 0.075, inertiaTensor);
 
 
     // Command controller sequencing
     std::vector<Step> steps = {
-        {0.5, 30.0, 0.0, 0.0},
-        {1.0, -30.0, 0.0, 0.0},
-        {1.5, 0.0, 30.0, 0.0},
-        {2.0, 0.0, -30.0, 0.0},
+        {0.5, 20.0, 0.0, 0.0},
+        {1.0, -20.0, 0.0, 0.0},
+        {1.5, 0.0, 20.0, 0.0},
+        {2.0, 0.0, -20.0, 0.0},
         {2.5, 0.0, 0.0, 10.0},
         {3.0, 0.0, 0.0, -10.0},
-        {3.5, -30.0, -30.0, -10.0},
-        {4.0, 30.0, 30.0, 10.0},
+        {3.5, -20.0, -20.0, -10.0},
+        {4.0, 20.0, 20.0, 10.0},
         {4.5, 0.0, 0.0, 0.0},
     };
 
     StepController stepController(steps);
 
+    // Calculate hover throttle
     double hoverThrottle = ((60 / (2 * M_PI * motorFL.getKV())) * sqrt((drone.getMass() * 9.81) / 
     (4 * motorFL.getThrustCoefficient()))) / escFL.getMaxVoltage();
 
@@ -133,25 +119,43 @@ int main(int, char**)
             dt
         );
 
+        // ESCs
+        escFL.update(flightController.getESCCommandFL(), dt);
+        escFR.update(flightController.getESCCommandFR(), dt);
+        escRL.update(flightController.getESCCommandRL(), dt);
+        escRR.update(flightController.getESCCommandRR(), dt);
+
+        // Motors
+        motorFL.update(escFL.getVoltageOutput(), dt);
+        motorFR.update(escFR.getVoltageOutput(), dt);
+        motorRL.update(escRL.getVoltageOutput(), dt);
+        motorRR.update(escRR.getVoltageOutput(), dt);
+        
+        // Thrust and torque vectors
+        double thrust[4] = {
+            motorFL.getThrust(), 
+            motorFR.getThrust(),
+            motorRL.getThrust(),
+            motorRR.getThrust()
+        };
+
+        double torque[4] = {
+            motorFL.getTorque(), 
+            motorFR.getTorque(),
+            motorRL.getTorque(),
+            motorRR.getTorque()
+        };
+
         // State update
-        drone.update(
-            flightController.getESCCommandFL(),
-            flightController.getESCCommandFR(),
-            flightController.getESCCommandRL(),
-            flightController.getESCCommandRR(),
-            dt
-        );
+        drone.update(thrust, torque, dt);
 
         // CSV output
         file << t << ","
         << angularRateTarget.x * 180.0 / M_PI << ","
         << angularRateTarget.y * 180.0 / M_PI << ","
         << angularRateTarget.z * 180.0 / M_PI << ","
-        << drone.getAngleDeg().x << ","
         << drone.getRateDeg().x << ","
-        << drone.getAngleDeg().y << ","
         << drone.getRateDeg().y << ","
-        << drone.getAngleDeg().z << ","
         << drone.getRateDeg().z << ","
         << motorFL.getRPM() << ","
         << motorFR.getRPM() << ","
