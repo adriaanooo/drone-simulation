@@ -22,19 +22,9 @@ void Drone::update(const double thrust[4], const double torque[4], double dt)
         thrust[0] + thrust[1] + thrust[2] + thrust[3]
     };
 
-    // Rotate the force vector wrt to the global reference frame
-    Quaternion localForceQuaternion{
-        0.0,
-        localForce.x,
-        localForce.y,
-        localForce.z
-    };
-    Quaternion globalForceQuarternion = quaternion * localForceQuaternion * quaternion.inverse();
-    globalForce = {
-        globalForceQuarternion.x,
-        globalForceQuarternion.y,
-        globalForceQuarternion.z - (9.81 * mass)
-    };
+    // Rotate the force vector wrt to the global reference frame using drone quaternion
+    Vector3 globalForce = localForce.rotate(quaternion);
+    globalForce.z = globalForce.z - (9.81 * mass); // Gravity
 
     // Create a vector of moments in the local reference frame
     Vector3 localMoment = {

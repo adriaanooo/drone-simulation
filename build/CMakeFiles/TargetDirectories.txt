@@ -1,3 +1,0 @@
-C:/Users/adriv/PersonalProjects/drone-simulation/build/CMakeFiles/drone-simulation.dir
-C:/Users/adriv/PersonalProjects/drone-simulation/build/CMakeFiles/edit_cache.dir
-C:/Users/adriv/PersonalProjects/drone-simulation/build/CMakeFiles/rebuild_cache.dir

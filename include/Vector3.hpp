@@ -1,5 +1,7 @@
 #pragma once
 
+struct Quaternion;
+
 struct Vector3
 {
     double x{0.0};
@@ -29,4 +31,26 @@ struct Vector3
             x * other.y - y * other.x
         };
     }
+
+    Quaternion toQuaternion();
+
+    Vector3 rotate(const Quaternion& q);
 };
+
+#include "Quaternion.hpp"
+
+inline Quaternion Vector3::toQuaternion()
+{
+    return Quaternion{0.0, x, y, z};
+}
+
+inline Vector3 Vector3::rotate(const Quaternion& q)
+{
+    Quaternion rotatedQuaternion = q * toQuaternion() * q.inverse();
+
+    return {
+        rotatedQuaternion.x,
+        rotatedQuaternion.y,
+        rotatedQuaternion.z
+    };
+}
