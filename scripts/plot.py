@@ -13,19 +13,26 @@ axes.ravel()
 sns.lineplot(x=df['Time (s)'], y=df['Target Roll Rate (deg/s)'], label='Target Roll Rate (deg/s)', ax=axes[0, 0], alpha=0.5, linestyle='--', color='b')
 sns.lineplot(x=df['Time (s)'], y=df['Target Pitch Rate (deg/s)'], label='Target Pitch Rate (deg/s)', ax=axes[0, 0], alpha=0.5, linestyle='--', color='r')
 sns.lineplot(x=df['Time (s)'], y=df['Target Yaw Rate (deg/s)'], label='Target Yaw Rate (deg/s)', ax=axes[0, 0], alpha=0.5, linestyle='--', color='g')
+
 sns.lineplot(x=df['Time (s)'], y=df['Roll Rate (deg/s)'], label='Roll Velocity (deg/s)', ax=axes[0, 0], color='b')
 sns.lineplot(x=df['Time (s)'], y=df['Pitch Rate (deg/s)'], label='Pitch Velocity (deg/s)', ax=axes[0, 0], color='r')
 sns.lineplot(x=df['Time (s)'], y=df['Yaw Rate (deg/s)'], label='Yaw Velocity (deg/s)', ax=axes[0, 0], color='g')
-sns.lineplot(x=df['Time (s)'], y=df['FL Motor RPM'], label='FL Motor RPM', ax=axes[2, 0])
-sns.lineplot(x=df['Time (s)'], y=df['FR Motor RPM'], label='FR Motor RPM', ax=axes[2, 0])
-sns.lineplot(x=df['Time (s)'], y=df['RL Motor RPM'], label='RL Motor RPM', ax=axes[2, 0])
-sns.lineplot(x=df['Time (s)'], y=df['RR Motor RPM'], label='RR Motor RPM', ax=axes[2, 0])
-sns.lineplot(x=df['Time (s)'], y=df['PID Roll'], label='PID Roll', ax=axes[0, 1])
-sns.lineplot(x=df['Time (s)'], y=df['PID Pitch'], label='PID Pitch', ax=axes[1, 1])
-sns.lineplot(x=df['Time (s)'], y=df['PID Yaw'], label='PID Yaw', ax=axes[2, 1])
+
+sns.lineplot(x=df['Time (s)'], y=df['X Position (m)'], label='X Position (m)', ax=axes[1, 0], color='b')
+sns.lineplot(x=df['Time (s)'], y=df['Y Position (m)'], label='Y Position (m)', ax=axes[1, 0], color='r')
+sns.lineplot(x=df['Time (s)'], y=df['Z Position (m)'], label='Z Position (m)', ax=axes[1, 0], color='g')
+
+sns.lineplot(x=df['Time (s)'], y=df['FL Motor RPM'], label='FL Motor RPM', ax=axes[2, 0], color='b')
+sns.lineplot(x=df['Time (s)'], y=df['FR Motor RPM'], label='FR Motor RPM', ax=axes[2, 0], color='r')
+sns.lineplot(x=df['Time (s)'], y=df['RL Motor RPM'], label='RL Motor RPM', ax=axes[2, 0], color='g')
+sns.lineplot(x=df['Time (s)'], y=df['RR Motor RPM'], label='RR Motor RPM', ax=axes[2, 0], color='y')
+
+sns.lineplot(x=df['Time (s)'], y=df['PID Roll'], label='PID Roll', ax=axes[0, 1], color='b')
+sns.lineplot(x=df['Time (s)'], y=df['PID Pitch'], label='PID Pitch', ax=axes[1, 1], color='r')
+sns.lineplot(x=df['Time (s)'], y=df['PID Yaw'], label='PID Yaw', ax=axes[2, 1], color='g')
 
 axes[0, 0].set_ylabel('Angular Rate (deg/s)')
-axes[1, 0].set_ylabel('Angle (deg)')
+axes[1, 0].set_ylabel('Position (m)')
 axes[2, 0].set_ylabel('Motor RPM')
 
 for ax in axes.flat:

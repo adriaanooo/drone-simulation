@@ -30,6 +30,8 @@ class Drone
         const Vector3 getRateDeg() const { return angularRate * RAD_TO_DEG; }
         const Vector3 getAccelerationDeg() const { return angularAcceleration * RAD_TO_DEG; }
 
+        const Vector3& getPosition() const { return position; }
+
     private:
         const double mass;
         const double armLength;

@@ -100,4 +100,17 @@ struct Quaternion
 
         return {roll, pitch, yaw};
     }
+
+    Quaternion inverse() const {
+
+        const Quaternion qConjugate = conjugate();
+        const double normSquared = norm() * norm();
+
+        return {
+            qConjugate.w / normSquared,
+            qConjugate.x / normSquared,
+            qConjugate.y / normSquared,
+            qConjugate.z / normSquared
+        };
+    }
 };

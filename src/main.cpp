@@ -23,6 +23,9 @@ int main(int, char**)
     << "Roll Rate (deg/s),"
     << "Pitch Rate (deg/s),"
     << "Yaw Rate (deg/s),"
+    << "X Position (m),"
+    << "Y Position (m),"
+    << "Z Position (m),"
     << "FL Motor RPM,"
     << "FR Motor RPM,"
     << "RL Motor RPM,"
@@ -98,7 +101,7 @@ int main(int, char**)
     StepController stepController(steps);
 
     // Calculate hover throttle
-    double hoverThrottle = ((60 / (2 * M_PI * motorFL.getKV())) * sqrt((drone.getMass() * 9.81) / 
+    double hoverThrottle = 1.5 * ((60 / (2 * M_PI * motorFL.getKV())) * sqrt((drone.getMass() * 9.81) / 
     (4 * motorFL.getThrustCoefficient()))) / escFL.getMaxVoltage();
 
     for (double t = 0.0; t < simulationTime; t +=dt)
@@ -157,6 +160,9 @@ int main(int, char**)
         << drone.getRateDeg().x << ","
         << drone.getRateDeg().y << ","
         << drone.getRateDeg().z << ","
+        << drone.getPosition().x << ","
+        << drone.getPosition().y << ","
+        << drone.getPosition().z << ","
         << motorFL.getRPM() << ","
         << motorFR.getRPM() << ","
         << motorRL.getRPM() << ","
