@@ -4,7 +4,7 @@
 Drone::Drone(
     double mass, 
     double armLength, 
-    const Vector3& inertia, 
+    const Matrix3& inertia, 
     Motor& motorFL, 
     Motor& motorFR, 
     Motor& motorRL, 
@@ -16,6 +16,7 @@ Drone::Drone(
 )
     : mass(mass),
     armLength(armLength),
+    momentArm(armLength * sin(45)),
     inertia(inertia),
     motorFL(motorFL),
     motorFR(motorFR),
@@ -50,54 +51,20 @@ void Drone::update(double escCommandFL, double escCommandFR, double escCommandRL
     double torqueRL = motorRL.getTorque();
     double torqueRR = motorRR.getTorque();
 
-    double netThrust = thrustFL + thrustFR + thrustRL + thrustRR;
+    Vector3 localForce{
+        0.0,
+        0.0, 
+        thrustFL + thrustFR + thrustRL + thrustRR
+    };
 
-    // X
-    acceleration.x = (netThrust / mass) * 
-    (
-        cos(angle.z) * sin(angle.y) * cos(angle.x)
-        + sin(angle.z) * sin(angle.x)
-    );
-    velocity.x += acceleration.x * dt;
-    position.x += velocity.x * dt;
+    Vector3 localMoment = {
+        (thrustFL + thrustRL - thrustFR - thrustRR) * momentArm,
+        (thrustFL + thrustFR - thrustRL - thrustRR) * momentArm,
+        torqueFL - torqueFR - torqueRL + torqueRR
+    };
 
-    // Y
-    acceleration.y =
-        (netThrust / mass) *
-        (
-            sin(angle.z) * sin(angle.y) * cos(angle.x)
-            - cos(angle.z) * sin(angle.x)
-        );
-    velocity.y += acceleration.y * dt;
-    position.y += velocity.y * dt;
-
-    // Z
-    acceleration.z =
-        (netThrust / mass) *
-        (
-            cos(angle.y) * cos(angle.x)
-        ) - 9.81;
-    velocity.z += acceleration.z * dt;
-    position.z += velocity.z * dt;
-
-    // Roll
-    double netRollTorque = (thrustFL + thrustRL - thrustFR - thrustRR) * armLength * sin(M_PI / 4);
-
-    angularAcceleration.x = netRollTorque / inertia.x;
-    angularRate.x += angularAcceleration.x * dt;
-    angle.x += angularRate.x * dt;
-
-    // Pitch
-    double netPitchTorque = (thrustFL + thrustFR - thrustRL - thrustRR) * armLength * sin(M_PI / 4);
-
-    angularAcceleration.y = netPitchTorque / inertia.y;
-    angularRate.y += angularAcceleration.y * dt;
-    angle.y += angularRate.y * dt;
-
-    // Yaw
-    double netYawTorque = (torqueFL + torqueRR - torqueFR - torqueRL);
-
-    angularAcceleration.z = netYawTorque / inertia.z;
-    angularRate.z += angularAcceleration.z * dt;
-    angle.z += angularRate.z * dt;
+    angularAcceleration = inertia.inverse() * (localMoment - (angularRate.crossProduct(inertia * angularRate)));
+    angularRate = angularRate + angularAcceleration * dt;
+    quaternion.applyAngularRate(angularRate, dt);
+    angle = quaternion.toEuler();
 }

@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Vector3.hpp"
+#include "Matrix3.hpp"
 #include "PID.hpp"
 #include "Motor.hpp"
 #include "IMU.hpp"
@@ -75,11 +76,11 @@ int main(int, char**)
     );
 
     // Drone initialization
-    const Vector3 inertiaTensor = {
-        0.000105, // Ixx
-        0.000132, // Iyy
-        0.000206  // Izz
-    };
+    const Matrix3 inertiaTensor = {{
+        {0.000105, 0.0, 0.0},
+        {0.0, 0.000132, 0.0},
+        {0.0, 0.0, 0.000206}
+    }};
 
     Drone drone(
         0.144, 

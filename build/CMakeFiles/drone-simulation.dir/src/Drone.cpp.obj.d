@@ -237,4 +237,6 @@ CMakeFiles/drone-simulation.dir/src/Drone.cpp.obj: \
  C:/Users/adriv/PersonalProjects/drone-simulation/include/Vector3.hpp \
  C:/Users/adriv/PersonalProjects/drone-simulation/include/FlightController.hpp \
  C:/Users/adriv/PersonalProjects/drone-simulation/include/PID.hpp \
- C:/Users/adriv/PersonalProjects/drone-simulation/include/ESC.hpp
+ C:/Users/adriv/PersonalProjects/drone-simulation/include/ESC.hpp \
+ C:/Users/adriv/PersonalProjects/drone-simulation/include/Matrix3.hpp \
+ C:/Users/adriv/PersonalProjects/drone-simulation/include/Quaternion.hpp

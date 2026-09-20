@@ -63,22 +63,41 @@ struct Quaternion
         return {w, -x, -y, -z};
     }
 
-    static Quaternion fromAngularRate(
+    void applyAngularRate(
         const Vector3& angularRate, 
-        const Quaternion& quaternionOld,
-        const double dt)
+        const double dt
+    )
     {
-        const Quaternion angularRateScaled = {
+        const Quaternion quaternionOld = {w, x, y, z};
+        const Quaternion angularRateQuaternion = {
             0.0,
-            angularRate.x * dt,
-            angularRate.y * dt,
-            angularRate.z * dt
+            angularRate.x,
+            angularRate.y,
+            angularRate.z
         };
+        const Quaternion quaternionDelta = angularRateQuaternion * (0.5 * dt);
+        Quaternion quaternionNew = quaternionOld + quaternionOld * quaternionDelta;
+        quaternionNew.normalize();
 
-        const Quaternion derivative = quaternionOld * angularRateScaled;
+        w = quaternionNew.w;
+        x = quaternionNew.x;
+        y = quaternionNew.y;
+        z = quaternionNew.z;
+    }
 
-        return {
-            quaternionOld + derivative * 0.5
-        };
+    Vector3 toEuler() const
+    {
+        const double sinr_cosp = 2.0 * (w * x + y * z);
+        const double cosr_cosp = 1.0 - 2.0 * (x * x + y * y);
+        const double roll = atan2(sinr_cosp, cosr_cosp);
+
+        const double sinp = 2.0 * (w * y - z * x);
+        const double pitch = asin(std::clamp(sinp, -1.0, 1.0));
+
+        const double siny_cosp = 2.0 * (w * z + x * y);
+        const double cosy_cosp = 1.0 - 2.0 * (y * y + z * z);
+        const double yaw = atan2(siny_cosp, cosy_cosp);
+
+        return {roll, pitch, yaw};
     }
 };

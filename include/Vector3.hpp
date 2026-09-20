@@ -20,4 +20,13 @@ struct Vector3
     {
         return {x * scalar, y * scalar, z * scalar};
     }
+
+    Vector3 crossProduct(const Vector3& other) const
+    {
+        return {
+            y * other.z - z * other.y,
+            x * other.z - z * other.x,
+            x * other.y - y * other.x
+        };
+    }
 };
