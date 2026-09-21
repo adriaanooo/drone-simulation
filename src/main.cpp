@@ -40,7 +40,7 @@ int main(int, char**)
 
     // Simulation parameters
     const double dt = 1.0e-5;
-    const double simulationTime = 5.0;
+    const double simulationTime = 10.0;
     const double imuUpdateRate = 1000; // Hz
     const double escUpdateRate = 400; // Hz
     const double flightControllerUpdateRate = 4000; // Hz
@@ -62,9 +62,9 @@ int main(int, char**)
     IMU imu(4.88e-4, imuUpdateRate); // 8.73e-4
 
     // PID controller initialization
-    PID rollRateController(0.04, 0.01, 0.0005, 400, derivativeCutoffFreq);
-    PID pitchRateController(0.05, 0.01, 0.0005, 400, derivativeCutoffFreq);
-    PID yawRateController(0.05, 0.01, 0.0, 400, derivativeCutoffFreq);
+    PID rollRateController(0.04, 0.3, 0.0005, 400, derivativeCutoffFreq);
+    PID pitchRateController(0.03, 0.3, 0.0005, 400, derivativeCutoffFreq);
+    PID yawRateController(0.05, 0.4, 0.0, 400, derivativeCutoffFreq);
 
     // Flight controller initialization
     FlightController flightController(
@@ -87,15 +87,16 @@ int main(int, char**)
 
     // Command controller sequencing
     std::vector<Step> steps = {
-        {0.5, 20.0, 0.0, 0.0},
-        {1.0, -20.0, 0.0, 0.0},
-        {1.5, 0.0, 20.0, 0.0},
-        {2.0, 0.0, -20.0, 0.0},
-        {2.5, 0.0, 0.0, 10.0},
-        {3.0, 0.0, 0.0, -10.0},
-        {3.5, -20.0, -20.0, -10.0},
-        {4.0, 20.0, 20.0, 10.0},
-        {4.5, 0.0, 0.0, 0.0},
+        {0.0, 0.0, 0.0, 0.0},
+        {1.0, 0.0, 0.0, 5.0},
+        {2.0, 0.0, 0.0, -5.0},
+        {3.0, 20.0, 0.0, 0.0},
+        {4.0, -20.0, 0.0, 0.0},
+        {5.0, 0.0, 10.0, 0.0},
+        {6.0, 0.0, -10.0, 0.0},
+        {7.0, -10.0, 10.0, 5.0},
+        {8.0, 10.0, -10.0, -5.0},
+        {9.0, 0.0, 0.0, 0.0}
     };
 
     StepController stepController(steps);
