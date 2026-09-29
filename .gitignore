@@ -1,0 +1,20 @@
+# CMake build output
+/build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# Generated simulation data
+/output.csv
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+
+# Operating system files
+.DS_Store
+Thumbs.db
