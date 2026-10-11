@@ -5,17 +5,17 @@ ESC::ESC(
     const double updateRate
 )
     : maxVoltage(maxVoltage),
-    updatePeriod(1 / updateRate)
+    updateRate(updateRate)
 {
 }
 
-void ESC::update(double throttleInput, double dt)
+void ESC::update(const double escCommand, const double dt)
 {
     timeSinceLastUpdate += dt;
 
-    if (timeSinceLastUpdate >= updatePeriod)
+    if (timeSinceLastUpdate >= (1 / updateRate))
     {
-        voltageOutput = throttleInput * maxVoltage;
-        timeSinceLastUpdate -= updatePeriod;
+        voltageOutput = escCommand * maxVoltage;
+        timeSinceLastUpdate -= (1 / updateRate);
     }
 }

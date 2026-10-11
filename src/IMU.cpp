@@ -1,6 +1,4 @@
 #include "IMU.hpp"
-#include <random>
-#include <chrono>
 
 IMU::IMU(
     double gyroNoiseSigma, 
@@ -8,20 +6,23 @@ IMU::IMU(
 )
     : gyroNoiseSigma(gyroNoiseSigma),
     noise(0.0, gyroNoiseSigma),
-    gyroUpdatePeriod(1 / gyroUpdateRate)
+    gyroUpdateRate(gyroUpdateRate)
 {
     gen.seed(std::chrono::steady_clock::now().time_since_epoch().count());
 }
 
-void IMU::update(Vector3 angularRate, double dt)
+void IMU::update(const Vector3 droneAngularRates, const double dt)
 {
     timeSinceLastUpdate += dt;
 
-    if (timeSinceLastUpdate >= gyroUpdatePeriod)
+    if (timeSinceLastUpdate >= (1 / gyroUpdateRate))
     {
-        angularRateMeasured.x = angularRate.x + noise(gen);
-        angularRateMeasured.y = angularRate.y + noise(gen);
-        angularRateMeasured.z = angularRate.z + noise(gen);
+        const Vector3 noiseVector = {
+            noise(gen),
+            noise(gen),
+            noise(gen)
+        };
+        angularRates = droneAngularRates + noiseVector;
         timeSinceLastUpdate = 0.0;
     }
 }

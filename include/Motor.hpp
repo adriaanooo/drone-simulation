@@ -1,25 +1,32 @@
 #pragma once
+#include <algorithm>
 #include <cmath>
 
 class Motor
 {
     public:
-        Motor(double KV, double thrustCoefficient, double torqueCoefficient, double timeConstant);
+        Motor(
+            const double KV, 
+            const double thrustCoefficient, 
+            const double torqueCoefficient, 
+            const double timeConstant
+        );
 
-        void update(double appliedVoltage, double dt);
+        void update(
+            const double appliedVoltage, 
+            const double dt
+        );
 
-        double getKV() const { return KV; }
-        double getThrustCoefficient() const { return thrustCoefficient; }
-
+        // Getters
         double getThrust();
         double getTorque();
         double getRPM() const { return rotationalVelocity * 60.0 / (2 * M_PI); }
 
     private:
-        double KV;
-        double thrustCoefficient;
-        double torqueCoefficient;
-        double timeConstant;
+        const double KV;
+        const double thrustCoefficient;
+        const double torqueCoefficient;
+        const double timeConstant;
 
         double rpm{0.0};
         double rotationalVelocity{0.0};

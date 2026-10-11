@@ -6,28 +6,31 @@
 #include "IMU.hpp"
 #include "ESC.hpp"
 
-class ControlSystem
+class Simulation
 {
     public:
-        ControlSystem(
+        Simulation(
             const double dt,
-            Drone plant,
+            Drone drone,
             FlightController flightController,
             Motor motor,
-            IMU imu,
-            ESC esc,
-            PID pidRoll,
-            PID pidPitch,
-            PID pidYaw
+            ESC esc
         );
+
+    void update(const Vector3 angularRateTargets);
+
+    // Getters
+    DroneState getDroneState() const
+    {
+        return drone.getState();
+    }
         
     private:
         double t{0.0};
         const double dt;
 
-        Drone plant;
+        Drone drone;
         FlightController flightController;
-        Motor motor;
-        IMU imu;
-        ESC esc;
+        std::array<Motor, 4> motors;
+        std::array<ESC, 4> escs;
 };

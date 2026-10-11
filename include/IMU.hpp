@@ -7,24 +7,23 @@
 class IMU
 {
     public:
-        IMU(double gyroNoiseSigma, double gyroUpdateRate);
+        IMU(const double gyroNoiseSigma, const double gyroUpdateRate);
 
-        void update(Vector3 angularRate, double dt);
+        void update(const Vector3 droneAngularRates, const double dt);
 
-        Vector3 getAngularRate() const { return angularRateMeasured; }
+        Vector3 getAngularRates() const { return angularRates; }
 
     private:
         Vector3 gyroError;
 
-        double gyroNoiseSigma;
-        double gyroUpdateRate;
-        double gyroUpdatePeriod;
+        const double gyroNoiseSigma;
+        const double gyroUpdateRate;
 
         std::mt19937 gen;
         std::normal_distribution<double> noise;
 
-        Vector3 angularRateMeasured{0.0, 0.0, 0.0};
-        Vector3 previousAngulareRateMeasured{0.0, 0.0, 0.0};
+        Vector3 angularRates{0.0, 0.0, 0.0};
+        Vector3 previousAngulareRates{0.0, 0.0, 0.0};
 
         double timeSinceLastUpdate{0.0};
 };

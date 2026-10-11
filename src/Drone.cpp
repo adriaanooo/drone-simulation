@@ -1,45 +1,48 @@
 #include "Drone.hpp"
-#include <cmath>
 
 Drone::Drone(
-    double mass, 
-    double armLength, 
-    const Matrix3& inertia
+    const double mass, 
+    const double armLength, 
+    const Matrix3 inertiaTensor
 )
     : mass(mass),
     armLength(armLength),
-    momentArm(armLength * sin(45)),
-    inertia(inertia)
+    momentArm(armLength * sin(45 * M_PI / 180.0)),
+    inertiaTensor(inertiaTensor)
 {
 }
 
-void Drone::update(const double thrust[4], const double torque[4], double dt)
+void Drone::update(
+        const std::array<double, 4> motorThrusts, 
+        const std::array<double, 4> motorTorques, 
+        const double dt
+    )
 {
     // Create vector of force in local reference frame
-    Vector3 localForce{
+    Vector3 localForces{
         0.0,
         0.0, 
-        thrust[0] + thrust[1] + thrust[2] + thrust[3]
+        motorThrusts[0] + motorThrusts[1] + motorThrusts[2] + motorThrusts[3]
     };
 
     // Rotate the force vector wrt to the global reference frame using drone quaternion
-    Vector3 globalForce = localForce.rotate(quaternion);
-    globalForce.z = globalForce.z - (9.81 * mass); // Gravity
+    Vector3 globalForces = localForces.rotate(quaternion);
+    globalForces.z = globalForces.z - (9.81 * mass); // Gravity
 
     // Create a vector of moments in the local reference frame
-    Vector3 localMoment = {
-        (thrust[0] + thrust[2] - thrust[1] - thrust[3]) * momentArm,
-        (thrust[0] + thrust[1] - thrust[2] - thrust[3]) * momentArm,
-        torque[0] - torque[1] - torque[2] + torque[3]
+    Vector3 localMoments = {
+        (motorThrusts[0] + motorThrusts[2] - motorThrusts[1] - motorThrusts[3]) * momentArm,
+        (motorThrusts[0] + motorThrusts[1] - motorThrusts[2] - motorThrusts[3]) * momentArm,
+        motorTorques[0] - motorTorques[1] - motorTorques[2] + motorTorques[3]
     };
 
     // Compute angular states
-    angularAcceleration = inertia.inverse() * (localMoment - (angularRate.crossProduct(inertia * angularRate)));
-    angularRate = angularRate + angularAcceleration * dt;
-    quaternion.applyAngularRate(angularRate, dt);
+    angularAccelerations = inertiaTensor.inverse() * (localMoments - (angularRates.crossProduct(inertiaTensor * angularRates)));
+    angularRates = angularRates + angularAccelerations * dt;
+    quaternion.applyAngularRate(angularRates, dt);
 
     // Compute translational states
-    acceleration = globalForce * (1 / mass);
-    velocity = velocity + acceleration * dt;
-    position = position + velocity * dt;
+    accelerations = globalForces * (1 / mass);
+    velocities = velocities + accelerations * dt;
+    worldCoordinates = worldCoordinates + velocities * dt;
 }

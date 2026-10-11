@@ -1,12 +1,10 @@
 #include "Motor.hpp"
-#include <algorithm>
-#include <cmath>
 
 Motor::Motor(
-    double KV, 
-    double thrustCoefficient, 
-    double torqueCoefficient, 
-    double timeConstant
+    const double KV, 
+    const double thrustCoefficient, 
+    const double torqueCoefficient, 
+    const double timeConstant
 )
     : KV(KV), 
     thrustCoefficient(thrustCoefficient), 
@@ -15,11 +13,13 @@ Motor::Motor(
 {
 }
 
-void Motor::update(double appliedVoltage, double dt)
+void Motor::update(const double appliedVoltage, const double dt)
 {
-    double rpmCommand = appliedVoltage * KV;
-    double rotationalVelocityCommand = rpmCommand * 2 * M_PI / 60.0;
+    // Get the commanded rotational velocity from the applied voltage and KV
+    const double rpmCommand = appliedVoltage * KV;
+    const double rotationalVelocityCommand = rpmCommand * 2 * M_PI / 60.0;
 
+    // First-order motor model for calculating rotational acceleration
     rotationalAcceleration = (rotationalVelocityCommand - rotationalVelocity) / timeConstant;
     rotationalVelocity += rotationalAcceleration * dt;
 }

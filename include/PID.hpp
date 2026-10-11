@@ -1,18 +1,29 @@
 #pragma once
+#include <algorithm>
+#include <cmath>
 
 class PID
 {
     public:
-        PID(double kp, double ki, double kd, double updateRate, const double derivativeCutoffFreq);
+        PID(
+            const double kp, 
+            const double ki, 
+            const double kd, 
+            const double updateRate, 
+            const double derivativeCutoffFreq);
 
-        double update(double setpoint, double measurement, double t, double dt);
+        double update(
+            const double setpoint, 
+            const double measurement, 
+            const double t, 
+            const double dt);
 
     private:
-        double kp;
-        double ki;
-        double kd;
-        double updatePeriod;
-        double derivativeCutoffFreq;
+        const double kp;
+        const double ki;
+        const double kd;
+        const double updateRate;
+        const double derivativeCutoffFreq;
 
         double integral{0.0};
         double previousError{0.0};

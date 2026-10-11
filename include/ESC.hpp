@@ -1,21 +1,20 @@
 #pragma once
+#include <array>
 
 class ESC
 {
     public:
         ESC(const double maxVoltage, const double updateRate);
 
-        void update(double throttleInput, double dt);
+        void update(const double escCommand, const double dt);
 
+        // Getters
         double getVoltageOutput() const { return voltageOutput; }
-        double getMaxVoltage() const { return maxVoltage; }
 
     private:
-        double maxVoltage;
-        double updateRate;
-        double updatePeriod;
+        const double maxVoltage;
+        const double updateRate;
 
-        double throttleInput{0.0};
         double voltageOutput{0.0};
         double timeSinceLastUpdate{0.0};
 };

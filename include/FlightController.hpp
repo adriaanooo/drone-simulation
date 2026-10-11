@@ -2,48 +2,36 @@
 
 #include "IMU.hpp"
 #include "PID.hpp"
-#include "ESC.hpp"
 #include "Vector3.hpp"
+#include <array>
+#include <algorithm>
 
 class FlightController
 {
     public:
         FlightController(
             const double updateRate,
-            IMU& imu, 
-            PID& rollRateController, 
-            PID& pitchRateController,
-            PID& yawRateController
+            IMU imu, 
+            std::array<PID, 3> rateControllers
         );
 
         void update(
-            double baseMotorCommand, 
-            const Vector3& angularRate,
-            Vector3& angularRateTarget, 
-            double dt
+            const double baseMotorCommand, 
+            const Vector3 angularRates,
+            const Vector3 angularRateTargets, 
+            const double dt
         );
 
-        const Vector3& getPIDOutput() const { return motorCommandOffset; }
-
-        double getESCCommandFL() const { return escCommandFL; }
-        double getESCCommandFR() const { return escCommandFR; }
-        double getESCCommandRL() const { return escCommandRL; }
-        double getESCCommandRR() const { return escCommandRR; }
+        Vector3 getPIDOutputs() const { return motorCommandOffsets; }
+        std::array<double, 4> getESCCommands() const { return escCommands; }
 
     private:
-        double const updateRate;
-        double const updatePeriod;
-        IMU& imu; 
-        PID& rollRateController; 
-        PID& pitchRateController;
-        PID& yawRateController;
+        const double updateRate;
+        IMU imu; 
+        std::array<PID, 3> rateControllers;
 
-        Vector3 motorCommandOffset{0.0, 0.0, 0.0};
-
-        double escCommandFL{0.0};
-        double escCommandFR{0.0};
-        double escCommandRL{0.0};
-        double escCommandRR{0.0};
+        Vector3 motorCommandOffsets{0.0, 0.0, 0.0};
+        std::array<double, 4> escCommands{0.0, 0.0, 0.0, 0.0};
 
         double t{0.0};
         double timeSinceLastUpdate{0.0};

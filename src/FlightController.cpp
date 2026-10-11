@@ -2,78 +2,66 @@
 
 FlightController::FlightController(
     const double updateRate,
-    IMU& imu, 
-    PID& rollRateController, 
-    PID& pitchRateController,
-    PID& yawRateController
+    IMU imu, 
+    std::array<PID, 3> rateControllers
 )
     : updateRate(updateRate),
-    updatePeriod(1 / updateRate),
     imu(imu),
-    rollRateController(rollRateController),
-    pitchRateController(pitchRateController),
-    yawRateController(yawRateController)
+    rateControllers(rateControllers)
 {
 }
 
 void FlightController::update(
-    double baseMotorCommand, 
-    const Vector3& angularRate,
-    Vector3& angularRateTarget, 
-    double dt
+    const double baseMotorCommand, 
+    const Vector3 angularRates,
+    const Vector3 angularRateTargets, 
+    const double dt
 )
 {
     timeSinceLastUpdate += dt;
     t += dt;
 
-    if (timeSinceLastUpdate >= updatePeriod)
+    if (timeSinceLastUpdate >= (1 / updateRate))
     {
         // IMU update
-        imu.update(angularRate, updatePeriod);
+        imu.update(angularRates, (1 / updateRate));
 
         // PID updates
-        motorCommandOffset.x = rollRateController.update(
-            angularRateTarget.x, 
-            imu.getAngularRate().x, 
-            t, 
-            updatePeriod
-        );
-        motorCommandOffset.y = pitchRateController.update(
-            angularRateTarget.y, 
-            imu.getAngularRate().y, 
-            t, 
-            updatePeriod
-        );
-        motorCommandOffset.z = yawRateController.update(
-            angularRateTarget.z,
-            imu.getAngularRate().z,
-            t,
-            updatePeriod
-        );
+        motorCommandOffsets = {
+            rateControllers[0].update(angularRateTargets.x, imu.getAngularRates().x, t, dt),
+            rateControllers[1].update(angularRateTargets.y, imu.getAngularRates().y, t, dt),
+            rateControllers[2].update(angularRateTargets.z, imu.getAngularRates().z, t, dt),
+        };
 
         // Motor mixer
-        escCommandFL = std::clamp(
-            baseMotorCommand + motorCommandOffset.x + motorCommandOffset.y + motorCommandOffset.z,
-            0.0,
-            1.0
-        );
-        escCommandFR = std::clamp(
-            baseMotorCommand - motorCommandOffset.x + motorCommandOffset.y - motorCommandOffset.z,
-            0.0,
-            1.0
-        );
-        escCommandRL = std::clamp(
-            baseMotorCommand + motorCommandOffset.x - motorCommandOffset.y - motorCommandOffset.z,
-            0.0,
-            1.0
-        );
-        escCommandRR = std::clamp(
-            baseMotorCommand - motorCommandOffset.x - motorCommandOffset.y + motorCommandOffset.z,
-            0.0,
-            1.0
-        );
+        escCommands = {
+            std::clamp
+            (
+                baseMotorCommand + motorCommandOffsets.x + motorCommandOffsets.y + motorCommandOffsets.z,
+                0.0,
+                1.0
+            ),
+            std::clamp
+            (
+                baseMotorCommand - motorCommandOffsets.x + motorCommandOffsets.y - motorCommandOffsets.z,
+                0.0,
+                1.0
+            ),
+            std::clamp
+            (
+                baseMotorCommand + motorCommandOffsets.x - motorCommandOffsets.y - motorCommandOffsets.z,
+                0.0,
+                1.0
+            ),
+            std::clamp
+            (
+                baseMotorCommand - motorCommandOffsets.x - motorCommandOffsets.y + motorCommandOffsets.z,
+                0.0,
+                1.0
+            )
+        };
 
         // Reset update period counter
-        timeSinceLastUpdate -= updatePeriod;
+        timeSinceLastUpdate -= (1 / updateRate);
     }
 }
